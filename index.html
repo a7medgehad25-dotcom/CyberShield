@@ -1,0 +1,1316 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Ahmed Gehad - CyberShield</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #050b14;
+            color: white;
+            line-height: 1.7;
+        }
+
+        /* =========================
+           NAVIGATION
+        ========================= */
+
+        nav {
+            background: rgba(10, 20, 34, 0.95);
+            padding: 18px;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid #17304d;
+            backdrop-filter: blur(10px);
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 12px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #00ff9d;
+        }
+
+        /* =========================
+           HOME
+        ========================= */
+
+        #home {
+            min-height: 90vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 40px 20px;
+
+            background:
+                linear-gradient(
+                    rgba(5, 11, 20, 0.82),
+                    rgba(5, 11, 20, 0.95)
+                ),
+                url("https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&w=1800&q=80");
+
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero-content {
+            max-width: 900px;
+        }
+
+        h1 {
+            font-size: 60px;
+            margin-bottom: 10px;
+        }
+
+        h1 span {
+            color: #00ff9d;
+        }
+
+        .creator {
+            color: #60a5fa;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .intro {
+            color: #c4d0dc;
+            font-size: 20px;
+            max-width: 800px;
+            margin: 20px auto;
+        }
+
+        .button {
+            display: inline-block;
+            margin-top: 25px;
+            padding: 15px 28px;
+            background: #00ff9d;
+            color: black;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .button:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 0 25px rgba(0, 255, 157, 0.4);
+        }
+
+        /* =========================
+           GENERAL SECTIONS
+        ========================= */
+
+        section {
+            padding: 80px 8%;
+        }
+
+        h2 {
+            color: #00ff9d;
+            text-align: center;
+            font-size: 38px;
+            margin-bottom: 45px;
+        }
+
+        h3 {
+            color: #60a5fa;
+        }
+
+        .section-intro {
+            max-width: 850px;
+            margin: -20px auto 40px;
+            text-align: center;
+            color: #aab8c8;
+            font-size: 18px;
+        }
+
+        /* =========================
+           TOPICS
+        ========================= */
+
+        .cards {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 25px;
+        }
+
+        .card {
+            background: #0b1726;
+            border: 1px solid #17304d;
+            border-radius: 15px;
+            padding: 30px;
+            width: 260px;
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            border-color: #00ff9d;
+            box-shadow: 0 10px 30px rgba(0, 255, 157, 0.1);
+        }
+
+        .card h3 {
+            color: #00ff9d;
+            font-size: 21px;
+        }
+
+        .card p {
+            color: #aab8c8;
+        }
+
+        /* =========================
+           CYBERSECURITY OVERVIEW
+        ========================= */
+
+        #cybersecurity {
+            background: #07101c;
+        }
+
+        .content-box {
+            max-width: 1100px;
+            margin: auto;
+            background: #0b1726;
+            border: 1px solid #17304d;
+            border-radius: 18px;
+            padding: 40px;
+            margin-bottom: 30px;
+        }
+
+        .content-box p {
+            color: #c0ccd8;
+            font-size: 17px;
+        }
+
+        .content-box strong {
+            color: #00ff9d;
+        }
+
+        .cyber-image {
+            width: 100%;
+            max-height: 450px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin: 20px 0;
+            border: 1px solid #17304d;
+        }
+
+        /* =========================
+           INFORMATION GRID
+        ========================= */
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        .info-card {
+            background: #0b1726;
+            border: 1px solid #17304d;
+            border-radius: 15px;
+            padding: 30px;
+            transition: 0.3s;
+        }
+
+        .info-card:hover {
+            border-color: #00ff9d;
+            transform: translateY(-5px);
+        }
+
+        .info-card h3 {
+            color: #00ff9d;
+        }
+
+        .info-card p {
+            color: #aab8c8;
+        }
+
+        /* =========================
+           LIST
+        ========================= */
+
+        .content-box ul {
+            color: #c4d0dc;
+            padding-left: 25px;
+        }
+
+        .content-box li {
+            margin-bottom: 10px;
+        }
+
+        /* =========================
+           VIDEO
+        ========================= */
+
+        .video-container {
+            max-width: 900px;
+            margin: 30px auto;
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 15px;
+            border: 1px solid #17304d;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* =========================
+           ROADMAP
+        ========================= */
+
+        .roadmap {
+            max-width: 900px;
+            margin: auto;
+        }
+
+        .roadmap-item {
+            background: #0b1726;
+            border-left: 4px solid #00ff9d;
+            margin-bottom: 20px;
+            padding: 25px;
+            border-radius: 10px;
+        }
+
+        .roadmap-item span {
+            color: #00ff9d;
+            font-weight: bold;
+        }
+
+        /* =========================
+           SECURITY TIPS
+        ========================= */
+
+        .tips {
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        .tip {
+            background: #0b1726;
+            border: 1px solid #17304d;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 10px;
+        }
+
+        .tip strong {
+            color: #00ff9d;
+        }
+
+        /* =========================
+           ABOUT
+        ========================= */
+
+        #about {
+            text-align: center;
+        }
+
+        #about p {
+            max-width: 800px;
+            margin: auto;
+            color: #aab8c8;
+            font-size: 18px;
+        }
+
+        .name {
+            color: #00ff9d;
+            font-weight: bold;
+        }
+
+        .creator-box {
+            max-width: 700px;
+            margin: 35px auto;
+            background: #0b1726;
+            border: 1px solid #17304d;
+            border-radius: 15px;
+            padding: 35px;
+        }
+
+        .creator-box h3 {
+            color: #00ff9d;
+            font-size: 26px;
+        }
+
+        /* =========================
+           QUIZ
+        ========================= */
+
+        .quiz {
+            max-width: 650px;
+            margin: auto;
+            background: #0b1726;
+            padding: 35px;
+            border-radius: 15px;
+            border: 1px solid #17304d;
+            text-align: center;
+        }
+
+        .quiz button {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            margin: 12px 0;
+            background: #101f31;
+            color: white;
+            border: 1px solid #294761;
+            border-radius: 7px;
+            cursor: pointer;
+            font-size: 15px;
+            transition: 0.3s;
+        }
+
+        .quiz button:hover {
+            background: #00ff9d;
+            color: black;
+        }
+
+        #answer {
+            margin-top: 20px;
+            color: #00ff9d;
+            font-weight: bold;
+        }
+
+        /* =========================
+           BACK TO TOP
+        ========================= */
+
+        .top-button {
+            display: block;
+            width: fit-content;
+            margin: 40px auto 0;
+            padding: 12px 20px;
+            background: #101f31;
+            color: #00ff9d;
+            text-decoration: none;
+            border: 1px solid #294761;
+            border-radius: 8px;
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            text-align: center;
+            padding: 35px;
+            background: #0a1422;
+            color: #71869b;
+        }
+
+        footer span {
+            color: #00ff9d;
+            font-weight: bold;
+        }
+
+        .footer-name {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 700px) {
+
+            nav a {
+                margin: 0 5px;
+                font-size: 13px;
+            }
+
+            h1 {
+                font-size: 40px;
+            }
+
+            h2 {
+                font-size: 30px;
+            }
+
+            section {
+                padding: 60px 5%;
+            }
+
+            .content-box {
+                padding: 25px;
+            }
+
+            .card {
+                width: 100%;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body id="top">
+
+
+    <!-- =========================
+         NAVIGATION
+    ========================= -->
+
+    <nav>
+
+        <a href="#home">Home</a>
+        <a href="#topics">Topics</a>
+        <a href="#cybersecurity">Cybersecurity</a>
+        <a href="#learning">Roadmap</a>
+        <a href="#videos">Videos</a>
+        <a href="#about">About Ahmed</a>
+        <a href="#quiz">Quiz</a>
+
+    </nav>
+
+
+    <!-- =========================
+         HOME
+    ========================= -->
+
+    <section id="home">
+
+        <div class="hero-content">
+
+            <div class="creator">
+                CREATED BY AHMED GEHAD ALI HAMOUDA
+            </div>
+
+            <h1>
+                Welcome to
+                <span>CyberShield</span>
+            </h1>
+
+            <p class="intro">
+
+                Explore the world of cybersecurity.
+
+                Learn how digital attacks happen,
+                how systems are protected,
+                and how security professionals defend
+                computers, networks and information.
+
+            </p>
+
+            <a class="button" href="#cybersecurity">
+                Explore Cybersecurity
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         TOPICS
+    ========================= -->
+
+    <section id="topics">
+
+        <h2>Cybersecurity Topics</h2>
+
+        <p class="section-intro">
+
+            Cybersecurity is a huge field. These are some
+            of the important areas you can explore.
+
+        </p>
+
+
+        <div class="cards">
+
+
+            <div class="card">
+
+                <h3>🔐 Cybersecurity</h3>
+
+                <p>
+                    Learn how computers, networks,
+                    applications and information are
+                    protected from digital threats.
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <h3>🎣 Phishing</h3>
+
+                <p>
+                    Understand how attackers use fake
+                    messages and websites to trick people.
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <h3>🦠 Malware</h3>
+
+                <p>
+                    Learn about malicious software such
+                    as viruses, worms and ransomware.
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <h3>🧑‍💻 Ethical Hacking</h3>
+
+                <p>
+                    Learn how authorized security testers
+                    identify weaknesses in systems.
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <h3>🌐 Network Security</h3>
+
+                <p>
+                    Learn how networks are protected
+                    against unauthorized access and attacks.
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <h3>🔑 Cryptography</h3>
+
+                <p>
+                    Learn how encryption and mathematical
+                    techniques help protect information.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         CYBERSECURITY MAIN SECTION
+    ========================= -->
+
+    <section id="cybersecurity">
+
+        <h2>🛡️ Cybersecurity</h2>
+
+
+        <div class="content-box">
+
+            <h3>What is Cybersecurity?</h3>
+
+            <p>
+
+                Cybersecurity is the practice of protecting
+                computers, networks, applications, devices
+                and data from unauthorized access,
+                attacks and other digital threats.
+
+            </p>
+
+            <p>
+
+                Almost every modern organization depends
+                on technology. Banks, hospitals, universities,
+                governments and businesses all use computer
+                systems to store and process important information.
+
+            </p>
+
+            <p>
+
+                Because of this, cybersecurity has become
+                an important part of modern technology.
+
+            </p>
+
+
+            <img
+                class="cyber-image"
+                src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1600&q=80"
+                alt="Computer servers and cybersecurity">
+
+
+            <p>
+
+                A cybersecurity professional works to reduce
+                security risks, identify vulnerabilities,
+                monitor systems and help protect information
+                from unauthorized access.
+
+            </p>
+
+        </div>
+
+
+        <div class="content-box">
+
+            <h3>Why is Cybersecurity Important?</h3>
+
+            <p>
+
+                Digital systems contain valuable information.
+                If these systems are not protected properly,
+                attackers may attempt to access or disrupt them.
+
+            </p>
+
+            <ul>
+
+                <li>Protect personal information.</li>
+
+                <li>Protect accounts and passwords.</li>
+
+                <li>Protect financial information.</li>
+
+                <li>Protect company networks.</li>
+
+                <li>Protect websites and applications.</li>
+
+                <li>Reduce the impact of security incidents.</li>
+
+            </ul>
+
+        </div>
+
+
+        <div class="content-box">
+
+            <h3>🧠 The CIA Triad</h3>
+
+            <p>
+
+                One important concept in cybersecurity is
+                the CIA Triad.
+
+            </p>
+
+
+            <div class="info-grid">
+
+                <div class="info-card">
+
+                    <h3>Confidentiality</h3>
+
+                    <p>
+
+                        Information should only be accessible
+                        to people who are authorized to access it.
+
+                    </p>
+
+                </div>
+
+
+                <div class="info-card">
+
+                    <h3>Integrity</h3>
+
+                    <p>
+
+                        Information should remain accurate
+                        and should not be changed without
+                        authorization.
+
+                    </p>
+
+                </div>
+
+
+                <div class="info-card">
+
+                    <h3>Availability</h3>
+
+                    <p>
+
+                        Systems and information should be
+                        available when authorized users need them.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="content-box">
+
+            <h3>⚔️ Common Cyber Threats</h3>
+
+            <div class="info-grid">
+
+
+                <div class="info-card">
+
+                    <h3>🎣 Phishing</h3>
+
+                    <p>
+
+                        Phishing attempts to trick people into
+                        revealing information or interacting with
+                        malicious content.
+
+                    </p>
+
+                </div>
+
+
+                <div class="info-card">
+
+                    <h3>🦠 Malware</h3>
+
+                    <p>
+
+                        Malware is malicious software designed
+                        to perform unwanted or harmful actions.
+
+                    </p>
+
+                </div>
+
+
+                <div class="info-card">
+
+                    <h3>🔒 Ransomware</h3>
+
+                    <p>
+
+                        Ransomware can prevent access to data
+                        and demand payment from victims.
+
+                    </p>
+
+                </div>
+
+
+                <div class="info-card">
+
+                    <h3>🌐 Network Attacks</h3>
+
+                    <p>
+
+                        Attackers may attempt to exploit
+                        weaknesses in networks and services.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="content-box">
+
+            <h3>🧑‍💻 Ethical Hacking</h3>
+
+            <p>
+
+                Ethical hacking is authorized security testing.
+                Security professionals attempt to identify
+                vulnerabilities so that organizations can
+                fix them.
+
+            </p>
+
+            <p>
+
+                The important difference is authorization.
+                Security testing should only be performed
+                on systems where you have explicit permission.
+
+            </p>
+
+
+            <img
+                class="cyber-image"
+                src="https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=1600&q=80"
+                alt="Cybersecurity professional">
+
+
+        </div>
+
+
+        <div class="content-box">
+
+            <h3>🌐 Network Security</h3>
+
+            <p>
+
+                Network security focuses on protecting
+                communication networks and the systems
+                connected to them.
+
+            </p>
+
+            <ul>
+
+                <li>Firewalls</li>
+
+                <li>Network monitoring</li>
+
+                <li>Access control</li>
+
+                <li>Secure protocols</li>
+
+                <li>Intrusion detection</li>
+
+            </ul>
+
+        </div>
+
+
+        <div class="content-box">
+
+            <h3>🔑 Cryptography</h3>
+
+            <p>
+
+                Cryptography uses mathematical techniques
+                to protect information.
+
+            </p>
+
+            <p>
+
+                Encryption can transform readable information
+                into a protected form so that unauthorized
+                people cannot easily understand it.
+
+            </p>
+
+            <img
+                class="cyber-image"
+                src="https://images.unsplash.com/photo-1510511459019-5dda7724fd87?auto=format&fit=crop&w=1600&q=80"
+                alt="Cybersecurity technology">
+
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         SECURITY TIPS
+    ========================= -->
+
+    <section id="tips">
+
+        <h2>🔒 Cybersecurity Safety Tips</h2>
+
+        <div class="tips">
+
+
+            <div class="tip">
+
+                <strong>1. Use strong passwords</strong>
+
+                <p>
+                    Use long, unique passwords for important
+                    accounts and avoid reusing the same password.
+                </p>
+
+            </div>
+
+
+            <div class="tip">
+
+                <strong>2. Enable MFA</strong>
+
+                <p>
+                    Multi-factor authentication adds another
+                    layer of protection to your accounts.
+                </p>
+
+            </div>
+
+
+            <div class="tip">
+
+                <strong>3. Be careful with links</strong>
+
+                <p>
+                    Check suspicious messages and links before
+                    interacting with them.
+                </p>
+
+            </div>
+
+
+            <div class="tip">
+
+                <strong>4. Keep software updated</strong>
+
+                <p>
+                    Updates often include security fixes.
+                </p>
+
+            </div>
+
+
+            <div class="tip">
+
+                <strong>5. Protect your personal information</strong>
+
+                <p>
+                    Avoid sharing sensitive information with
+                    unknown people or suspicious websites.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         LEARNING ROADMAP
+    ========================= -->
+
+    <section id="learning">
+
+        <h2>🗺️ Cybersecurity Learning Roadmap</h2>
+
+        <p class="section-intro">
+
+            A simple roadmap for someone who wants to
+            start learning cybersecurity.
+
+        </p>
+
+
+        <div class="roadmap">
+
+
+            <div class="roadmap-item">
+
+                <span>STEP 01</span>
+
+                <h3>Computer Fundamentals</h3>
+
+                <p>
+                    Learn how computers, operating systems,
+                    files and processes work.
+                </p>
+
+            </div>
+
+
+            <div class="roadmap-item">
+
+                <span>STEP 02</span>
+
+                <h3>Networking</h3>
+
+                <p>
+                    Learn IP addresses, DNS, HTTP,
+                    TCP/IP, routers and basic network concepts.
+                </p>
+
+            </div>
+
+
+            <div class="roadmap-item">
+
+                <span>STEP 03</span>
+
+                <h3>Linux</h3>
+
+                <p>
+                    Learn the Linux command line and
+                    basic system administration.
+                </p>
+
+            </div>
+
+
+            <div class="roadmap-item">
+
+                <span>STEP 04</span>
+
+                <h3>Programming</h3>
+
+                <p>
+                    Start with programming fundamentals.
+                    Python is particularly useful for many
+                    cybersecurity tasks.
+                </p>
+
+            </div>
+
+
+            <div class="roadmap-item">
+
+                <span>STEP 05</span>
+
+                <h3>Cybersecurity Fundamentals</h3>
+
+                <p>
+                    Learn authentication, access control,
+                    encryption, vulnerabilities and security principles.
+                </p>
+
+            </div>
+
+
+            <div class="roadmap-item">
+
+                <span>STEP 06</span>
+
+                <h3>Advanced Security</h3>
+
+                <p>
+                    Explore areas such as ethical hacking,
+                    digital forensics, cloud security and
+                    incident response.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         VIDEOS
+    ========================= -->
+
+    <section id="videos">
+
+        <h2>🎥 Cybersecurity Videos</h2>
+
+        <p class="section-intro">
+
+            Video resources can help make cybersecurity
+            concepts easier to understand.
+
+        </p>
+
+
+        <div class="content-box">
+
+            <h3>Introduction to Cybersecurity</h3>
+
+            <div class="video-container">
+
+                <iframe
+                    src="https://www.youtube.com/embed/inWWhr5tnEA"
+                    title="Cybersecurity Introduction"
+                    allowfullscreen>
+                </iframe>
+
+            </div>
+
+        </div>
+
+
+        <div class="content-box">
+
+            <h3>Cybersecurity Learning</h3>
+
+            <div class="video-container">
+
+                <iframe
+                    src="https://www.youtube.com/embed/yr1Psapupsc"
+                    title="Cybersecurity Learning"
+                    allowfullscreen>
+                </iframe>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         ABOUT AHMED
+    ========================= -->
+
+    <section id="about">
+
+        <h2>👤 About the Creator</h2>
+
+
+        <div class="creator-box">
+
+            <h3>Ahmed Gehad Ali Hamouda</h3>
+
+            <p>
+
+                I am Ahmed Gehad Ali Hamouda,
+                the creator of CyberShield.
+
+            </p>
+
+            <p>
+
+                I am interested in cybersecurity,
+                technology and computer systems.
+
+                CyberShield is part of my journey
+                into the world of cybersecurity.
+
+            </p>
+
+            <p>
+
+                My goal with this project is to create
+                an educational website that makes
+                cybersecurity concepts easier to understand.
+
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         QUIZ
+    ========================= -->
+
+    <section id="quiz">
+
+        <h2>🧠 Cybersecurity Quiz</h2>
+
+
+        <div class="quiz">
+
+            <h3>
+                Which password is safer?
+            </h3>
+
+
+            <button onclick="wrongAnswer()">
+                Ahmed123
+            </button>
+
+
+            <button onclick="wrongAnswer()">
+                12345678
+            </button>
+
+
+            <button onclick="rightAnswer()">
+                A long unique password + MFA
+            </button>
+
+
+            <button onclick="wrongAnswer()">
+                password123
+            </button>
+
+
+            <div id="answer"></div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         BACK TO TOP
+    ========================= -->
+
+    <a class="top-button" href="#top">
+        ↑ Back to Top
+    </a>
+
+
+    <!-- =========================
+         FOOTER
+    ========================= -->
+
+    <footer>
+
+        <div class="footer-name">
+            CyberShield
+        </div>
+
+        Created and developed by
+
+        <span>
+            Ahmed Gehad Ali Hamouda
+        </span>
+
+        <br>
+
+        © 2026 CyberShield — All Rights Reserved
+
+    </footer>
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================= -->
+
+    <script>
+
+        function rightAnswer() {
+
+            document.getElementById("answer").innerHTML =
+                "✅ Correct! A long unique password combined with MFA provides stronger protection.";
+
+        }
+
+
+        function wrongAnswer() {
+
+            document.getElementById("answer").innerHTML =
+                "❌ Try again! Think about password length, uniqueness and MFA.";
+
+        }
+
+    </script>
+
+
+</body>
+
+</html>
