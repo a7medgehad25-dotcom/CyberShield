@@ -1,0 +1,1276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Web Development | CyberShield</title>
+
+    <style>
+        :root {
+            --bg: #160b18;
+            --surface: #241126;
+            --surface2: #321631;
+            --primary: #ff4d8d;
+            --secondary: #ff7a59;
+            --accent: #ffb3c7;
+            --text: #fff5f8;
+            --muted: #cdb7c1;
+            --border: rgba(255, 77, 141, 0.25);
+            --shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(22, 11, 24, 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: auto;
+            padding: 18px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .logo span {
+            color: white;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: var(--muted);
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .hero {
+            min-height: 75vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 80px 20px;
+            background:
+                radial-gradient(circle at top right, rgba(255, 77, 141, 0.18), transparent 35%),
+                radial-gradient(circle at bottom left, rgba(255, 122, 89, 0.14), transparent 35%);
+        }
+
+        .hero-content {
+            max-width: 850px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            margin-bottom: 20px;
+        }
+
+        .hero h1 span {
+            color: var(--primary);
+        }
+
+        .hero p {
+            color: var(--muted);
+            font-size: 1.15rem;
+            max-width: 700px;
+            margin: auto;
+        }
+
+        .hero-buttons {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 13px 22px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            transition: 0.3s;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: #160b18;
+            font-weight: bold;
+        }
+
+        .btn-secondary {
+            background: var(--surface);
+            color: white;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+        }
+
+        section {
+            max-width: 1200px;
+            margin: auto;
+            padding: 75px 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 45px;
+        }
+
+        .section-title h2 {
+            font-size: 2.3rem;
+            margin-bottom: 10px;
+        }
+
+        .section-title p {
+            color: var(--muted);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 22px;
+        }
+
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: var(--shadow);
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+        }
+
+        .card h3 {
+            color: var(--primary);
+            margin-bottom: 12px;
+        }
+
+        .card p {
+            color: var(--muted);
+        }
+
+        .tag {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 6px 10px;
+            border-radius: 20px;
+            background: rgba(255, 77, 141, 0.12);
+            color: var(--accent);
+            font-size: 0.85rem;
+        }
+
+        .notes {
+            max-width: 900px;
+            margin: auto;
+        }
+
+        details {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            margin-bottom: 15px;
+            overflow: hidden;
+        }
+
+        summary {
+            cursor: pointer;
+            padding: 18px 20px;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        details div {
+            padding: 0 20px 20px;
+            color: var(--muted);
+        }
+
+        code {
+            background: #100810;
+            color: var(--accent);
+            padding: 3px 7px;
+            border-radius: 5px;
+        }
+
+        pre {
+            background: #100810;
+            padding: 18px;
+            border-radius: 10px;
+            overflow-x: auto;
+            margin-top: 15px;
+            color: #ffdce7;
+        }
+
+        .roadmap {
+            position: relative;
+        }
+
+        .roadmap-item {
+            background: var(--surface);
+            border-left: 4px solid var(--primary);
+            padding: 22px;
+            margin-bottom: 18px;
+            border-radius: 0 12px 12px 0;
+        }
+
+        .roadmap-item h3 {
+            color: var(--primary);
+            margin-bottom: 7px;
+        }
+
+        .resource-card {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .resource-card a {
+            margin-top: 18px;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        .harvard {
+            border: 1px solid rgba(255, 122, 89, 0.35);
+            background: linear-gradient(
+                145deg,
+                rgba(255, 77, 141, 0.1),
+                rgba(255, 122, 89, 0.08)
+            );
+        }
+
+        .project-number {
+            font-size: 2rem;
+            color: var(--secondary);
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .check-list {
+            list-style: none;
+        }
+
+        .check-list li {
+            margin: 12px 0;
+            color: var(--muted);
+        }
+
+        .check-list li::before {
+            content: "✓";
+            color: var(--primary);
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 35px 20px;
+            border-top: 1px solid var(--border);
+            color: var(--muted);
+        }
+
+        .back {
+            text-align: center;
+            padding-bottom: 80px;
+        }
+
+        @media (max-width: 700px) {
+            nav {
+                flex-direction: column;
+            }
+
+            .nav-links {
+                justify-content: center;
+            }
+
+            .hero {
+                min-height: 65vh;
+            }
+
+            section {
+                padding: 55px 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <nav>
+        <div class="logo">
+            Cyber<span>Shield</span> / Web Development
+        </div>
+
+        <div class="nav-links">
+            <a href="../index.html">Home</a>
+            <a href="../index.html#learning-center">Learning Center</a>
+            <a href="#topics">Topics</a>
+            <a href="#notes">Notes</a>
+            <a href="#courses">Courses</a>
+        </div>
+    </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-content">
+
+        <h1>
+            Learn <span>Web Development</span>
+        </h1>
+
+        <p>
+            Build modern websites and web applications by learning
+            HTML, CSS, JavaScript, frontend development, backend concepts,
+            databases, HTTP, responsive design, and more.
+        </p>
+
+        <div class="hero-buttons">
+            <a href="#roadmap" class="btn btn-primary">
+                Start Roadmap
+            </a>
+
+            <a href="#courses" class="btn btn-secondary">
+                Harvard Courses
+            </a>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- FUNDAMENTALS -->
+<section id="topics">
+
+    <div class="section-title">
+        <h2>Web Development Fundamentals</h2>
+        <p>The essential concepts every web developer should understand.</p>
+    </div>
+
+    <div class="grid">
+
+        <div class="card">
+            <h3>HTML</h3>
+            <p>
+                Learn how HTML structures webpages using elements,
+                headings, paragraphs, links, images, forms, tables and more.
+            </p>
+            <span class="tag">Structure</span>
+        </div>
+
+        <div class="card">
+            <h3>CSS</h3>
+            <p>
+                Learn how to style websites using colors, layouts,
+                Flexbox, Grid, animations, spacing and responsive design.
+            </p>
+            <span class="tag">Design</span>
+        </div>
+
+        <div class="card">
+            <h3>JavaScript</h3>
+            <p>
+                Learn programming for the browser and create interactive
+                websites using variables, functions, events and APIs.
+            </p>
+            <span class="tag">Programming</span>
+        </div>
+
+        <div class="card">
+            <h3>DOM</h3>
+            <p>
+                Understand how JavaScript interacts with HTML elements
+                and changes webpage content dynamically.
+            </p>
+            <span class="tag">Browser</span>
+        </div>
+
+        <div class="card">
+            <h3>HTTP</h3>
+            <p>
+                Understand how browsers and servers communicate using
+                requests, responses, methods, headers and status codes.
+            </p>
+            <span class="tag">Networking</span>
+        </div>
+
+        <div class="card">
+            <h3>Responsive Design</h3>
+            <p>
+                Build websites that work properly on phones, tablets,
+                laptops and large screens.
+            </p>
+            <span class="tag">UI / UX</span>
+        </div>
+
+        <div class="card">
+            <h3>Accessibility</h3>
+            <p>
+                Learn how to make websites easier to use for people
+                with different abilities and assistive technologies.
+            </p>
+            <span class="tag">Web Standards</span>
+        </div>
+
+        <div class="card">
+            <h3>APIs</h3>
+            <p>
+                Learn how web applications communicate with external
+                services and exchange data.
+            </p>
+            <span class="tag">Integration</span>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- FRONTEND / BACKEND -->
+<section>
+
+    <div class="section-title">
+        <h2>Frontend & Backend</h2>
+        <p>Understand the two major sides of modern web applications.</p>
+    </div>
+
+    <div class="grid">
+
+        <div class="card">
+            <h3>Frontend Development</h3>
+
+            <ul class="check-list">
+                <li>HTML</li>
+                <li>CSS</li>
+                <li>JavaScript</li>
+                <li>DOM</li>
+                <li>Responsive Design</li>
+                <li>Browser APIs</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h3>Backend Development</h3>
+
+            <ul class="check-list">
+                <li>Servers</li>
+                <li>APIs</li>
+                <li>Authentication</li>
+                <li>Databases</li>
+                <li>Server-side programming</li>
+                <li>Application architecture</li>
+            </ul>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- NOTES -->
+<section id="notes">
+
+    <div class="section-title">
+        <h2>Web Development Notes</h2>
+        <p>Open any topic to study the notes.</p>
+    </div>
+
+    <div class="notes">
+
+        <details>
+            <summary>What is Web Development?</summary>
+
+            <div>
+                <p>
+                    Web development is the process of creating websites
+                    and web applications that run through web browsers.
+                </p>
+
+                <p>
+                    It commonly involves HTML, CSS and JavaScript,
+                    together with backend technologies and databases.
+                </p>
+            </div>
+        </details>
+
+
+        <details>
+            <summary>HTML Basics</summary>
+
+            <div>
+                <p>
+                    HTML describes the structure of a webpage.
+                </p>
+
+<pre>
+&lt;h1&gt;Hello World&lt;/h1&gt;
+
+&lt;p&gt;Welcome to CyberShield.&lt;/p&gt;
+
+&lt;a href="https://example.com"&gt;
+    Visit Website
+&lt;/a&gt;
+</pre>
+
+                <p>
+                    Common elements include headings, paragraphs,
+                    links, images, lists, forms and tables.
+                </p>
+            </div>
+        </details>
+
+
+        <details>
+            <summary>CSS Basics</summary>
+
+            <div>
+                <p>
+                    CSS controls the visual appearance of HTML elements.
+                </p>
+
+<pre>
+body {
+    background: black;
+    color: white;
+}
+
+h1 {
+    color: cyan;
+}
+</pre>
+
+                <p>
+                    Modern CSS also includes Flexbox and CSS Grid
+                    for creating layouts.
+                </p>
+            </div>
+        </details>
+
+
+        <details>
+            <summary>JavaScript Basics</summary>
+
+            <div>
+                <p>
+                    JavaScript adds programming and interactivity to webpages.
+                </p>
+
+<pre>
+let name = "Ahmed";
+
+function greet() {
+    console.log("Hello " + name);
+}
+
+greet();
+</pre>
+            </div>
+        </details>
+
+
+        <details>
+            <summary>DOM</summary>
+
+            <div>
+                <p>
+                    The Document Object Model represents the webpage
+                    as objects that JavaScript can access and modify.
+                </p>
+
+<pre>
+document.querySelector("h1").textContent =
+    "CyberShield";
+</pre>
+            </div>
+        </details>
+
+
+        <details>
+            <summary>HTTP</summary>
+
+            <div>
+                <p>
+                    HTTP is one of the main protocols used for communication
+                    between web clients and servers.
+                </p>
+
+                <p>
+                    Common HTTP methods include:
+                </p>
+
+                <ul>
+                    <li>GET</li>
+                    <li>POST</li>
+                    <li>PUT</li>
+                    <li>PATCH</li>
+                    <li>DELETE</li>
+                </ul>
+
+                <p>
+                    Common status codes include 200, 404 and 500.
+                </p>
+            </div>
+        </details>
+
+
+        <details>
+            <summary>Responsive Web Design</summary>
+
+            <div>
+                <p>
+                    Responsive design allows a website to adapt
+                    to different screen sizes.
+                </p>
+
+                <p>
+                    CSS media queries, flexible layouts and responsive
+                    images are commonly used.
+                </p>
+            </div>
+        </details>
+
+
+        <details>
+            <summary>Web Accessibility</summary>
+
+            <div>
+                <p>
+                    Accessibility means designing websites that can be
+                    used by as many people as possible.
+                </p>
+
+                <p>
+                    Good practices include semantic HTML,
+                    meaningful labels, keyboard navigation and
+                    appropriate text alternatives for images.
+                </p>
+            </div>
+        </details>
+
+    </div>
+
+</section>
+
+
+<!-- ROADMAP -->
+<section id="roadmap">
+
+    <div class="section-title">
+        <h2>Web Development Roadmap</h2>
+        <p>Follow these stages from beginner to real projects.</p>
+    </div>
+
+    <div class="roadmap">
+
+        <div class="roadmap-item">
+            <h3>01 — HTML</h3>
+            <p>
+                Learn HTML structure, semantic elements, links,
+                images, tables and forms.
+            </p>
+        </div>
+
+        <div class="roadmap-item">
+            <h3>02 — CSS</h3>
+            <p>
+                Learn selectors, box model, Flexbox, Grid,
+                positioning, animations and responsive design.
+            </p>
+        </div>
+
+        <div class="roadmap-item">
+            <h3>03 — JavaScript</h3>
+            <p>
+                Learn variables, conditions, loops, functions,
+                arrays, objects and events.
+            </p>
+        </div>
+
+        <div class="roadmap-item">
+            <h3>04 — DOM & APIs</h3>
+            <p>
+                Learn DOM manipulation, browser APIs,
+                JSON and fetch requests.
+            </p>
+        </div>
+
+        <div class="roadmap-item">
+            <h3>05 — Git & GitHub</h3>
+            <p>
+                Learn version control and how to manage
+                and publish your projects.
+            </p>
+        </div>
+
+        <div class="roadmap-item">
+            <h3>06 — Backend</h3>
+            <p>
+                Learn servers, APIs, authentication and
+                server-side programming.
+            </p>
+        </div>
+
+        <div class="roadmap-item">
+            <h3>07 — Databases</h3>
+            <p>
+                Connect web applications to databases
+                and work with stored data.
+            </p>
+        </div>
+
+        <div class="roadmap-item">
+            <h3>08 — Real Projects</h3>
+            <p>
+                Build complete websites and web applications
+                to demonstrate your skills.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- HARVARD -->
+<section id="courses">
+
+    <div class="section-title">
+        <h2>Harvard Free Courses</h2>
+        <p>Study web development through Harvard's CS50 courses.</p>
+    </div>
+
+    <div class="grid">
+
+        <div class="card harvard resource-card">
+
+            <div>
+                <h3>CS50's Web Programming</h3>
+
+                <p>
+                    Harvard's web programming course covering
+                    HTML, CSS, JavaScript, Python, Django,
+                    SQL, APIs and modern web applications.
+                </p>
+            </div>
+
+            <a
+                href="https://cs50.harvard.edu/web/"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Open Harvard Course →
+            </a>
+
+        </div>
+
+
+        <div class="card harvard resource-card">
+
+            <div>
+                <h3>CS50x</h3>
+
+                <p>
+                    Harvard's introduction to computer science.
+                    Excellent foundation for programming and
+                    problem solving before going deeper into web development.
+                </p>
+            </div>
+
+            <a
+                href="https://cs50.harvard.edu/x/"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Open CS50x →
+            </a>
+
+        </div>
+
+
+        <div class="card harvard resource-card">
+
+            <div>
+                <h3>CS50 SQL</h3>
+
+                <p>
+                    Learn SQL and relational databases,
+                    which are important for backend web development.
+                </p>
+            </div>
+
+            <a
+                href="https://cs50.harvard.edu/sql/"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Open CS50 SQL →
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- HARVARD WEB WEEKS -->
+<section>
+
+    <div class="section-title">
+        <h2>CS50 Web Lessons</h2>
+        <p>Useful parts of Harvard's web programming curriculum.</p>
+    </div>
+
+    <div class="grid">
+
+        <div class="card resource-card">
+            <h3>Week 0 — HTML, CSS</h3>
+
+            <p>
+                Introduction to HTML, CSS and the basic structure
+                of web applications.
+            </p>
+
+            <a
+                href="https://cs50.harvard.edu/web/weeks/0/"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Open Lesson →
+            </a>
+        </div>
+
+
+        <div class="card resource-card">
+            <h3>Week 1 — Git</h3>
+
+            <p>
+                Learn version control and how Git is used
+                in software projects.
+            </p>
+
+            <a
+                href="https://cs50.harvard.edu/web/weeks/1/"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Open Lesson →
+            </a>
+        </div>
+
+
+        <div class="card resource-card">
+            <h3>Week 2 — Python</h3>
+
+            <p>
+                Learn Python fundamentals for web programming.
+            </p>
+
+            <a
+                href="https://cs50.harvard.edu/web/weeks/2/"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Open Lesson →
+            </a>
+        </div>
+
+
+        <div class="card resource-card">
+            <h3>Week 3 — Django</h3>
+
+            <p>
+                Learn how Django can be used to build
+                web applications with Python.
+            </p>
+
+            <a
+                href="https://cs50.harvard.edu/web/weeks/3/"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Open Lesson →
+            </a>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- VIDEOS / LEARNING -->
+<section>
+
+    <div class="section-title">
+        <h2>Videos & Learning Resources</h2>
+        <p>Free resources for learning web development.</p>
+    </div>
+
+    <div class="grid">
+
+        <div class="card resource-card">
+
+            <div>
+                <h3>freeCodeCamp</h3>
+
+                <p>
+                    Free interactive courses and projects
+                    covering HTML, CSS, JavaScript and more.
+                </p>
+            </div>
+
+            <a
+                href="https://www.freecodecamp.org/learn/"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Start Learning →
+            </a>
+
+        </div>
+
+
+        <div class="card resource-card">
+
+            <div>
+                <h3>MDN Web Docs</h3>
+
+                <p>
+                    A major reference for HTML, CSS, JavaScript,
+                    Web APIs and browser technologies.
+                </p>
+            </div>
+
+            <a
+                href="https://developer.mozilla.org/en-US/docs/Web"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Open MDN →
+            </a>
+
+        </div>
+
+
+        <div class="card resource-card">
+
+            <div>
+                <h3>W3Schools</h3>
+
+                <p>
+                    Beginner-friendly tutorials and examples
+                    for HTML, CSS, JavaScript and SQL.
+                </p>
+            </div>
+
+            <a
+                href="https://www.w3schools.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Open W3Schools →
+            </a>
+
+        </div>
+
+
+        <div class="card resource-card">
+
+            <div>
+                <h3>Harvard CS50</h3>
+
+                <p>
+                    Harvard's official CS50 courses include
+                    programming and web development material.
+                </p>
+            </div>
+
+            <a
+                href="https://cs50.harvard.edu/"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Open CS50 →
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- STUDY MATERIALS -->
+<section>
+
+    <div class="section-title">
+        <h2>Study Materials</h2>
+        <p>Useful documentation and learning references.</p>
+    </div>
+
+    <div class="grid">
+
+        <div class="card resource-card">
+            <h3>HTML Documentation</h3>
+
+            <p>
+                Learn HTML elements and web standards.
+            </p>
+
+            <a
+                href="https://developer.mozilla.org/en-US/docs/Web/HTML"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                HTML Docs →
+            </a>
+        </div>
+
+
+        <div class="card resource-card">
+            <h3>CSS Documentation</h3>
+
+            <p>
+                Learn modern CSS features and layouts.
+            </p>
+
+            <a
+                href="https://developer.mozilla.org/en-US/docs/Web/CSS"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                CSS Docs →
+            </a>
+        </div>
+
+
+        <div class="card resource-card">
+            <h3>JavaScript Documentation</h3>
+
+            <p>
+                Study JavaScript language features and Web APIs.
+            </p>
+
+            <a
+                href="https://developer.mozilla.org/en-US/docs/Web/JavaScript"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                JavaScript Docs →
+            </a>
+        </div>
+
+
+        <div class="card resource-card">
+            <h3>Web.dev</h3>
+
+            <p>
+                Learn about modern web development,
+                performance and best practices.
+            </p>
+
+            <a
+                href="https://web.dev/"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Open Web.dev →
+            </a>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- PROJECTS -->
+<section>
+
+    <div class="section-title">
+        <h2>Web Development Projects</h2>
+        <p>Build these projects while progressing through the roadmap.</p>
+    </div>
+
+    <div class="grid">
+
+        <div class="card">
+            <div class="project-number">01</div>
+            <h3>Personal Portfolio</h3>
+            <p>
+                Create a professional website containing
+                your skills, projects and contact information.
+            </p>
+        </div>
+
+
+        <div class="card">
+            <div class="project-number">02</div>
+            <h3>To-Do App</h3>
+            <p>
+                Build a JavaScript application that lets users
+                add, complete and delete tasks.
+            </p>
+        </div>
+
+
+        <div class="card">
+            <div class="project-number">03</div>
+            <h3>Weather App</h3>
+            <p>
+                Create a frontend application that displays
+                weather data from an API.
+            </p>
+        </div>
+
+
+        <div class="card">
+            <div class="project-number">04</div>
+            <h3>Student Management System</h3>
+            <p>
+                Build a web interface for managing student
+                information and grades.
+            </p>
+        </div>
+
+
+        <div class="card">
+            <div class="project-number">05</div>
+            <h3>Online Book Store</h3>
+            <p>
+                Create a multi-page store interface with
+                products, categories and search.
+            </p>
+        </div>
+
+
+        <div class="card">
+            <div class="project-number">06</div>
+            <h3>CyberShield Dashboard</h3>
+            <p>
+                Build a cybersecurity dashboard containing
+                learning materials, statistics and security topics.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- LEARNING STRATEGY -->
+<section>
+
+    <div class="section-title">
+        <h2>How to Learn Web Development</h2>
+        <p>Don't only watch tutorials — build things.</p>
+    </div>
+
+    <div class="grid">
+
+        <div class="card">
+            <h3>Learn</h3>
+            <p>
+                Understand the concept before moving to the next topic.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>Code</h3>
+            <p>
+                Write the examples yourself instead of only watching.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>Break Things</h3>
+            <p>
+                Experiment with your code and understand why errors happen.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>Build</h3>
+            <p>
+                Turn what you learned into real projects.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- BACK -->
+<div class="back">
+
+    <a
+        href="../index.html#learning-center"
+        class="btn btn-primary"
+    >
+        ← Back to Learning Center
+    </a>
+
+</div>
+
+
+<footer>
+
+    <p>
+        © 2026 CyberShield — Web Development Learning Center
+    </p>
+
+    <p>
+        Learn • Build • Practice • Improve
+    </p>
+
+</footer>
+
+
+</body>
+</html>

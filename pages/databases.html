@@ -1,0 +1,1987 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Databases | CyberShield</title>
+
+    <style>
+        :root {
+            --bg: #07121f;
+            --surface: #0d1d2e;
+            --surface2: #142b40;
+            --primary: #ffb703;
+            --secondary: #fb8500;
+            --accent: #ffd166;
+            --text: #f5f9ff;
+            --muted: #a9bacb;
+            --border: rgba(255, 183, 3, 0.22);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(7, 18, 31, 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav {
+            max-width: 1200px;
+            margin: auto;
+            padding: 18px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .logo span {
+            color: white;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: var(--muted);
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .hero {
+            min-height: 540px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 90px 25px;
+
+            background:
+                radial-gradient(
+                    circle at top right,
+                    rgba(255, 183, 3, 0.15),
+                    transparent 35%
+                ),
+                radial-gradient(
+                    circle at bottom left,
+                    rgba(251, 133, 0, 0.10),
+                    transparent 35%
+                );
+        }
+
+        .hero-content {
+            max-width: 900px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 8px 17px;
+            border: 1px solid var(--border);
+            border-radius: 30px;
+            color: var(--primary);
+            background: rgba(255, 183, 3, 0.07);
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: clamp(42px, 7vw, 78px);
+            margin-bottom: 20px;
+        }
+
+        .hero h1 span {
+            color: var(--primary);
+        }
+
+        .hero p {
+            max-width: 760px;
+            margin: auto;
+            color: var(--muted);
+            font-size: 18px;
+        }
+
+        .btns {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 13px 22px;
+            border-radius: 10px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: #15100a;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255, 183, 3, 0.2);
+        }
+
+        .btn-secondary {
+            border: 1px solid var(--border);
+            color: var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--surface2);
+        }
+
+        section {
+            max-width: 1200px;
+            margin: auto;
+            padding: 80px 25px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 45px;
+        }
+
+        .section-title h2 {
+            font-size: 38px;
+            margin-bottom: 10px;
+        }
+
+        .section-title p {
+            color: var(--muted);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(
+                auto-fit,
+                minmax(250px, 1fr)
+            );
+            gap: 22px;
+        }
+
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 25px;
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(255, 183, 3, 0.6);
+        }
+
+        .card-icon {
+            font-size: 35px;
+            margin-bottom: 15px;
+        }
+
+        .card h3 {
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            color: var(--muted);
+        }
+
+        .card ul {
+            padding-left: 20px;
+            color: var(--muted);
+            margin-top: 12px;
+        }
+
+        .card li {
+            margin-bottom: 5px;
+        }
+
+        .notes {
+            display: grid;
+            gap: 15px;
+        }
+
+        details {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 18px 20px;
+        }
+
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 18px;
+        }
+
+        details p,
+        details ul {
+            margin-top: 15px;
+            color: var(--muted);
+        }
+
+        details ul {
+            padding-left: 22px;
+        }
+
+        .code-box {
+            background: #040b12;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 20px;
+            overflow-x: auto;
+        }
+
+        pre {
+            color: var(--accent);
+            font-family: Consolas, monospace;
+        }
+
+        .roadmap {
+            display: grid;
+            gap: 18px;
+        }
+
+        .roadmap-step {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 22px;
+            border-radius: 15px;
+        }
+
+        .number {
+            min-width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--primary);
+            color: #15100a;
+            font-weight: bold;
+        }
+
+        .roadmap-step h3 {
+            color: var(--primary);
+        }
+
+        .roadmap-step p {
+            color: var(--muted);
+        }
+
+        .resource-card {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .resource-card a {
+            display: inline-block;
+            padding: 11px 15px;
+            border-radius: 9px;
+            border: 1px solid var(--border);
+            color: var(--primary);
+            transition: 0.3s;
+        }
+
+        .resource-card a:hover {
+            background: var(--surface2);
+        }
+
+        .highlight {
+            border: 1px solid rgba(255, 183, 3, 0.45);
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(255, 183, 3, 0.08),
+                    rgba(251, 133, 0, 0.03)
+                );
+        }
+
+        .sql-example {
+            margin-top: 15px;
+            background: #03080d;
+            padding: 18px;
+            border-radius: 10px;
+            overflow-x: auto;
+        }
+
+        .sql-example code {
+            color: var(--accent);
+            font-family: Consolas, monospace;
+        }
+
+        .video-card {
+            min-height: 230px;
+        }
+
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 35px 20px;
+            text-align: center;
+            color: var(--muted);
+        }
+
+        footer strong {
+            color: var(--primary);
+        }
+
+        @media (max-width: 700px) {
+
+            .nav {
+                flex-direction: column;
+            }
+
+            .hero {
+                padding-top: 60px;
+            }
+
+            section {
+                padding: 60px 18px;
+            }
+
+            .roadmap-step {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+
+<body>
+
+
+<!-- ================= HEADER ================= -->
+
+<header>
+
+    <nav class="nav">
+
+        <div class="logo">
+            Cyber<span>Shield</span> / Databases
+        </div>
+
+        <div class="nav-links">
+
+            <a href="../index.html">
+                Home
+            </a>
+
+            <a href="../index.html#learning-center">
+                Learning Center
+            </a>
+
+            <a href="#topics">
+                Topics
+            </a>
+
+            <a href="#notes">
+                Notes
+            </a>
+
+            <a href="#courses">
+                Courses
+            </a>
+
+        </div>
+
+    </nav>
+
+</header>
+
+
+
+<!-- ================= HERO ================= -->
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <div class="badge">
+            🗄️ Database Learning Center
+        </div>
+
+        <h1>
+            Master <span>Databases</span>
+        </h1>
+
+        <p>
+            Learn how databases store, organize, retrieve and manage
+            information. Start with SQL and relational databases,
+            then move toward database design, optimization and
+            real-world applications.
+        </p>
+
+        <div class="btns">
+
+            <a
+                href="#roadmap"
+                class="btn btn-primary"
+            >
+                Start Roadmap
+            </a>
+
+            <a
+                href="#courses"
+                class="btn btn-secondary"
+            >
+                Free Courses
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= DATABASE FUNDAMENTALS ================= -->
+
+<section id="topics">
+
+    <div class="section-title">
+
+        <h2>
+            Database Fundamentals
+        </h2>
+
+        <p>
+            The concepts you need before working with advanced databases.
+        </p>
+
+    </div>
+
+
+    <div class="grid">
+
+
+        <div class="card">
+
+            <div class="card-icon">
+                🗃️
+            </div>
+
+            <h3>
+                What is a Database?
+            </h3>
+
+            <p>
+                A database is an organized collection of information
+                that can be stored, accessed, modified and managed
+                efficiently.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">
+                🏛️
+            </div>
+
+            <h3>
+                DBMS
+            </h3>
+
+            <p>
+                A Database Management System provides the tools
+                needed to create, manage and interact with databases.
+            </p>
+
+            <ul>
+
+                <li>SQLite</li>
+                <li>MySQL</li>
+                <li>PostgreSQL</li>
+                <li>SQL Server</li>
+
+            </ul>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">
+                📊
+            </div>
+
+            <h3>
+                Tables
+            </h3>
+
+            <p>
+                Relational databases organize information into
+                tables consisting of rows and columns.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">
+                🔑
+            </div>
+
+            <h3>
+                Keys
+            </h3>
+
+            <p>
+                Keys help identify records and connect related tables.
+            </p>
+
+            <ul>
+
+                <li>Primary Key</li>
+                <li>Foreign Key</li>
+                <li>Candidate Key</li>
+
+            </ul>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">
+                🔗
+            </div>
+
+            <h3>
+                Relationships
+            </h3>
+
+            <p>
+                Tables can be connected through relationships.
+            </p>
+
+            <ul>
+
+                <li>One-to-One</li>
+                <li>One-to-Many</li>
+                <li>Many-to-Many</li>
+
+            </ul>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">
+                ⚡
+            </div>
+
+            <h3>
+                SQL
+            </h3>
+
+            <p>
+                SQL is used to communicate with relational databases
+                and perform operations on stored data.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= SQL OPERATIONS ================= -->
+
+<section>
+
+    <div class="section-title">
+
+        <h2>
+            SQL Operations
+        </h2>
+
+        <p>
+            Learn the core commands used to work with databases.
+        </p>
+
+    </div>
+
+
+    <div class="grid">
+
+
+        <div class="card">
+
+            <div class="card-icon">
+                🔎
+            </div>
+
+            <h3>
+                SELECT
+            </h3>
+
+            <p>
+                Retrieve information from a table.
+            </p>
+
+            <div class="sql-example">
+
+<code>
+SELECT name, age
+FROM students;
+</code>
+
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">
+                ➕
+            </div>
+
+            <h3>
+                INSERT
+            </h3>
+
+            <p>
+                Add new records to a table.
+            </p>
+
+            <div class="sql-example">
+
+<code>
+INSERT INTO students
+(name, age)
+VALUES
+('Ahmed', 18);
+</code>
+
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">
+                ✏️
+            </div>
+
+            <h3>
+                UPDATE
+            </h3>
+
+            <p>
+                Modify existing records.
+            </p>
+
+            <div class="sql-example">
+
+<code>
+UPDATE students
+SET age = 19
+WHERE id = 1;
+</code>
+
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">
+                🗑️
+            </div>
+
+            <h3>
+                DELETE
+            </h3>
+
+            <p>
+                Remove records from a table.
+            </p>
+
+            <div class="sql-example">
+
+<code>
+DELETE FROM students
+WHERE id = 1;
+</code>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= NOTES ================= -->
+
+<section id="notes">
+
+    <div class="section-title">
+
+        <h2>
+            📚 Database Notes
+        </h2>
+
+        <p>
+            Click a topic to open its explanation.
+        </p>
+
+    </div>
+
+
+    <div class="notes">
+
+
+        <details>
+
+            <summary>
+                📌 What is a Relational Database?
+            </summary>
+
+            <p>
+                A relational database stores data in tables.
+                Each table contains rows and columns, and relationships
+                can connect tables together.
+            </p>
+
+            <ul>
+
+                <li>Tables contain data.</li>
+                <li>Rows represent records.</li>
+                <li>Columns represent attributes.</li>
+                <li>Keys connect related information.</li>
+
+            </ul>
+
+        </details>
+
+
+
+        <details>
+
+            <summary>
+                📌 Primary Key
+            </summary>
+
+            <p>
+                A primary key uniquely identifies each record
+                inside a table.
+            </p>
+
+            <div class="sql-example">
+
+<code>
+CREATE TABLE students (
+    id INTEGER PRIMARY KEY,
+    name TEXT,
+    age INTEGER
+);
+</code>
+
+            </div>
+
+        </details>
+
+
+
+        <details>
+
+            <summary>
+                📌 Foreign Key
+            </summary>
+
+            <p>
+                A foreign key creates a relationship between
+                records in different tables.
+            </p>
+
+            <div class="sql-example">
+
+<code>
+CREATE TABLE courses (
+    id INTEGER PRIMARY KEY,
+    student_id INTEGER,
+    name TEXT,
+
+    FOREIGN KEY (student_id)
+    REFERENCES students(id)
+);
+</code>
+
+            </div>
+
+        </details>
+
+
+
+        <details>
+
+            <summary>
+                📌 WHERE Clause
+            </summary>
+
+            <p>
+                WHERE allows you to filter records based on a condition.
+            </p>
+
+            <div class="sql-example">
+
+<code>
+SELECT *
+FROM students
+WHERE age >= 18;
+</code>
+
+            </div>
+
+        </details>
+
+
+
+        <details>
+
+            <summary>
+                📌 ORDER BY
+            </summary>
+
+            <p>
+                ORDER BY sorts the returned results.
+            </p>
+
+            <div class="sql-example">
+
+<code>
+SELECT *
+FROM students
+ORDER BY age DESC;
+</code>
+
+            </div>
+
+        </details>
+
+
+
+        <details>
+
+            <summary>
+                📌 GROUP BY
+            </summary>
+
+            <p>
+                GROUP BY groups records that share a particular value.
+                It is commonly used with aggregate functions.
+            </p>
+
+            <div class="sql-example">
+
+<code>
+SELECT department, COUNT(*)
+FROM students
+GROUP BY department;
+</code>
+
+            </div>
+
+        </details>
+
+
+
+        <details>
+
+            <summary>
+                📌 JOIN
+            </summary>
+
+            <p>
+                JOIN allows you to combine information from multiple
+                related tables.
+            </p>
+
+            <div class="sql-example">
+
+<code>
+SELECT students.name, courses.name
+FROM students
+JOIN courses
+ON students.id = courses.student_id;
+</code>
+
+            </div>
+
+        </details>
+
+
+
+        <details>
+
+            <summary>
+                📌 Database Normalization
+            </summary>
+
+            <p>
+                Normalization is a process used to organize data
+                and reduce unnecessary duplication.
+            </p>
+
+            <ul>
+
+                <li>Reduce duplicate information.</li>
+                <li>Improve data consistency.</li>
+                <li>Make relationships clearer.</li>
+                <li>Reduce update problems.</li>
+
+            </ul>
+
+        </details>
+
+
+
+        <details>
+
+            <summary>
+                📌 Indexes
+            </summary>
+
+            <p>
+                An index can help a database find information
+                more efficiently, especially when working with
+                large amounts of data.
+            </p>
+
+            <div class="sql-example">
+
+<code>
+CREATE INDEX idx_student_name
+ON students(name);
+</code>
+
+            </div>
+
+        </details>
+
+
+
+        <details>
+
+            <summary>
+                📌 Transactions
+            </summary>
+
+            <p>
+                A transaction groups database operations into
+                a logical unit of work.
+            </p>
+
+            <ul>
+
+                <li>COMMIT</li>
+                <li>ROLLBACK</li>
+
+            </ul>
+
+        </details>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= DATABASE TYPES ================= -->
+
+<section>
+
+    <div class="section-title">
+
+        <h2>
+            Database Technologies
+        </h2>
+
+        <p>
+            Understand the technologies you may encounter in real projects.
+        </p>
+
+    </div>
+
+
+    <div class="grid">
+
+
+        <div class="card">
+
+            <div class="card-icon">
+                🪶
+            </div>
+
+            <h3>
+                SQLite
+            </h3>
+
+            <p>
+                A lightweight relational database stored in a file.
+                It is especially useful for learning and small applications.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">
+                🐬
+            </div>
+
+            <h3>
+                MySQL
+            </h3>
+
+            <p>
+                A widely used relational database system for web
+                applications and many business systems.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">
+                🐘
+            </div>
+
+            <h3>
+                PostgreSQL
+            </h3>
+
+            <p>
+                A powerful open-source relational database with
+                extensive features and strong SQL support.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">
+                🏢
+            </div>
+
+            <h3>
+                SQL Server
+            </h3>
+
+            <p>
+                Microsoft's relational database platform used
+                in many enterprise environments.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">
+                🍃
+            </div>
+
+            <h3>
+                MongoDB
+            </h3>
+
+            <p>
+                A document-oriented database commonly associated
+                with NoSQL application development.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">
+                ☁️
+            </div>
+
+            <h3>
+                Cloud Databases
+            </h3>
+
+            <p>
+                Modern applications can use managed database
+                services hosted in cloud environments.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= ROADMAP ================= -->
+
+<section id="roadmap">
+
+    <div class="section-title">
+
+        <h2>
+            🗺️ Database Roadmap
+        </h2>
+
+        <p>
+            A structured path from beginner SQL to database projects.
+        </p>
+
+    </div>
+
+
+    <div class="roadmap">
+
+
+        <div class="roadmap-step">
+
+            <div class="number">
+                1
+            </div>
+
+            <div>
+
+                <h3>
+                    Database Fundamentals
+                </h3>
+
+                <p>
+                    Understand databases, DBMS, tables, records,
+                    fields and relationships.
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="roadmap-step">
+
+            <div class="number">
+                2
+            </div>
+
+            <div>
+
+                <h3>
+                    SQL Basics
+                </h3>
+
+                <p>
+                    Learn SELECT, INSERT, UPDATE, DELETE,
+                    WHERE and ORDER BY.
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="roadmap-step">
+
+            <div class="number">
+                3
+            </div>
+
+            <div>
+
+                <h3>
+                    Relational Design
+                </h3>
+
+                <p>
+                    Learn primary keys, foreign keys,
+                    relationships and entity modeling.
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="roadmap-step">
+
+            <div class="number">
+                4
+            </div>
+
+            <div>
+
+                <h3>
+                    JOINs & Advanced Queries
+                </h3>
+
+                <p>
+                    Practice JOIN, GROUP BY, HAVING,
+                    subqueries and set operations.
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="roadmap-step">
+
+            <div class="number">
+                5
+            </div>
+
+            <div>
+
+                <h3>
+                    Database Design
+                </h3>
+
+                <p>
+                    Study normalization, constraints,
+                    data types and schema design.
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="roadmap-step">
+
+            <div class="number">
+                6
+            </div>
+
+            <div>
+
+                <h3>
+                    Indexes & Optimization
+                </h3>
+
+                <p>
+                    Learn why indexes matter and how databases
+                    can optimize queries.
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="roadmap-step">
+
+            <div class="number">
+                7
+            </div>
+
+            <div>
+
+                <h3>
+                    Connect Databases to Applications
+                </h3>
+
+                <p>
+                    Connect SQL databases with Python,
+                    JavaScript or other programming languages.
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="roadmap-step">
+
+            <div class="number">
+                8
+            </div>
+
+            <div>
+
+                <h3>
+                    Build Real Projects
+                </h3>
+
+                <p>
+                    Build complete systems such as student,
+                    inventory or library management applications.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= HARVARD COURSES ================= -->
+
+<section id="courses">
+
+    <div class="section-title">
+
+        <h2>
+            🎓 Harvard Free Database Courses
+        </h2>
+
+        <p>
+            Official Harvard CS50 OpenCourseWare resources.
+        </p>
+
+    </div>
+
+
+    <div class="grid">
+
+
+        <div class="card resource-card highlight">
+
+            <div class="card-icon">
+                🎓
+            </div>
+
+            <h3>
+                CS50's Introduction to Databases with SQL
+            </h3>
+
+            <p>
+                Harvard's dedicated database course. It covers
+                querying, relationships, database design, writing,
+                viewing, optimization and scaling.
+            </p>
+
+            <a
+                href="https://cs50.harvard.edu/sql/"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Open Harvard CS50 SQL →
+            </a>
+
+        </div>
+
+
+
+        <div class="card resource-card">
+
+            <div class="card-icon">
+                💻
+            </div>
+
+            <h3>
+                CS50x — Introduction to Computer Science
+            </h3>
+
+            <p>
+                Harvard's main CS course includes SQL and databases
+                alongside programming, algorithms, data structures
+                and web development.
+            </p>
+
+            <a
+                href="https://cs50.harvard.edu/x/"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Open CS50x →
+            </a>
+
+        </div>
+
+
+
+        <div class="card resource-card">
+
+            <div class="card-icon">
+                🌐
+            </div>
+
+            <h3>
+                CS50 Web Programming
+            </h3>
+
+            <p>
+                Continue into web applications using Python,
+                JavaScript and SQL, including database design
+                and Django.
+            </p>
+
+            <a
+                href="https://cs50.harvard.edu/web/"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Open CS50 Web →
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= HARVARD SQL WEEKS ================= -->
+
+<section>
+
+    <div class="section-title">
+
+        <h2>
+            🎥 Harvard CS50 SQL Video Lessons
+        </h2>
+
+        <p>
+            Direct course weeks with lectures, notes, slides,
+            source code and videos.
+        </p>
+
+    </div>
+
+
+    <div class="grid">
+
+
+        <div class="card video-card resource-card">
+
+            <div class="card-icon">
+                🔎
+            </div>
+
+            <h3>
+                Week 0 — Querying
+            </h3>
+
+            <p>
+                Tables, SQL, SQLite, SELECT, WHERE,
+                pattern matching, ordering and aggregate functions.
+            </p>
+
+            <a
+                href="https://cs50.harvard.edu/sql/weeks/0/"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Watch & Study Week 0 →
+            </a>
+
+        </div>
+
+
+
+        <div class="card video-card resource-card">
+
+            <div class="card-icon">
+                🔗
+            </div>
+
+            <h3>
+                Week 1 — Relating
+            </h3>
+
+            <p>
+                Relationships, entity diagrams, primary keys,
+                foreign keys and JOINs.
+            </p>
+
+            <a
+                href="https://cs50.harvard.edu/sql/weeks/1/"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Watch & Study Week 1 →
+            </a>
+
+        </div>
+
+
+
+        <div class="card video-card resource-card">
+
+            <div class="card-icon">
+                🏗️
+            </div>
+
+            <h3>
+                Week 2 — Designing
+            </h3>
+
+            <p>
+                Schemas, normalization, constraints,
+                data types and database design.
+            </p>
+
+            <a
+                href="https://cs50.harvard.edu/sql/weeks/2/"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Watch & Study Week 2 →
+            </a>
+
+        </div>
+
+
+
+        <div class="card video-card resource-card">
+
+            <div class="card-icon">
+                ✍️
+            </div>
+
+            <h3>
+                More CS50 SQL Lessons
+            </h3>
+
+            <p>
+                Continue through the official CS50 SQL
+                course materials and remaining weeks.
+            </p>
+
+            <a
+                href="https://cs50.harvard.edu/sql/"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Open Full Course →
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= PRACTICE ================= -->
+
+<section>
+
+    <div class="section-title">
+
+        <h2>
+            🧪 Database Projects
+        </h2>
+
+        <p>
+            Build projects to turn SQL knowledge into practical skills.
+        </p>
+
+    </div>
+
+
+    <div class="grid">
+
+
+        <div class="card">
+
+            <div class="card-icon">
+                🎓
+            </div>
+
+            <h3>
+                Student Management System
+            </h3>
+
+            <p>
+                Create tables for students, courses,
+                departments and grades.
+            </p>
+
+            <ul>
+
+                <li>Students</li>
+                <li>Courses</li>
+                <li>Grades</li>
+                <li>Departments</li>
+
+            </ul>
+
+        </div>
+
+
+
+        <div class="card">
+
+            <div class="card-icon">
+                📚
+            </div>
+
+            <h3>
+                Library Database
+            </h3>
+
+            <p>
+                Manage books, authors, students and borrowing records.
+            </p>
+
+        </div>
+
+
+
+        <div class="card">
+
+            <div class="card-icon">
+                📦
+            </div>
+
+            <h3>
+                Inventory System
+            </h3>
+
+            <p>
+                Track products, categories, suppliers
+                and stock levels.
+            </p>
+
+        </div>
+
+
+
+        <div class="card">
+
+            <div class="card-icon">
+                🛒
+            </div>
+
+            <h3>
+                E-Commerce Database
+            </h3>
+
+            <p>
+                Design a database for users, products,
+                orders and payments.
+            </p>
+
+        </div>
+
+
+
+        <div class="card">
+
+            <div class="card-icon">
+                🏥
+            </div>
+
+            <h3>
+                Clinic Database
+            </h3>
+
+            <p>
+                Model patients, doctors, appointments
+                and medical records.
+            </p>
+
+        </div>
+
+
+
+        <div class="card">
+
+            <div class="card-icon">
+                💼
+            </div>
+
+            <h3>
+                Business Information System
+            </h3>
+
+            <p>
+                Connect business data with customers,
+                employees, products and transactions.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= STUDY MATERIALS ================= -->
+
+<section>
+
+    <div class="section-title">
+
+        <h2>
+            📖 Database Study Materials
+        </h2>
+
+        <p>
+            Additional references for learning SQL and databases.
+        </p>
+
+    </div>
+
+
+    <div class="grid">
+
+
+        <div class="card resource-card">
+
+            <h3>
+                W3Schools SQL
+            </h3>
+
+            <p>
+                Interactive SQL reference and examples.
+            </p>
+
+            <a
+                href="https://www.w3schools.com/sql/"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Open SQL Tutorial →
+            </a>
+
+        </div>
+
+
+
+        <div class="card resource-card">
+
+            <h3>
+                PostgreSQL Documentation
+            </h3>
+
+            <p>
+                Official documentation for PostgreSQL.
+            </p>
+
+            <a
+                href="https://www.postgresql.org/docs/"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Open PostgreSQL Docs →
+            </a>
+
+        </div>
+
+
+
+        <div class="card resource-card">
+
+            <h3>
+                SQLite Documentation
+            </h3>
+
+            <p>
+                Official SQLite documentation and technical reference.
+            </p>
+
+            <a
+                href="https://www.sqlite.org/docs.html"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Open SQLite Docs →
+            </a>
+
+        </div>
+
+
+
+        <div class="card resource-card">
+
+            <h3>
+                MySQL Documentation
+            </h3>
+
+            <p>
+                Official MySQL documentation and reference material.
+            </p>
+
+            <a
+                href="https://dev.mysql.com/doc/"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Open MySQL Docs →
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= DATABASE + BIS ================= -->
+
+<section>
+
+    <div class="card highlight">
+
+        <h2 style="color:var(--primary); margin-bottom:15px;">
+            🧩 Databases + BIS
+        </h2>
+
+        <p style="color:var(--muted);">
+            Databases are one of the most important technical areas
+            in Business Information Systems. BIS applications often
+            depend on storing, querying and analyzing business data.
+        </p>
+
+        <br>
+
+        <ul style="padding-left:22px; color:var(--muted);">
+
+            <li>Customer information</li>
+            <li>Products and inventory</li>
+            <li>Sales transactions</li>
+            <li>Employees</li>
+            <li>Financial records</li>
+            <li>Business reports</li>
+            <li>Business intelligence</li>
+
+        </ul>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= FINAL ================= -->
+
+<section>
+
+    <div
+        class="card highlight"
+        style="text-align:center;"
+    >
+
+        <h2
+            style="
+                color:var(--primary);
+                margin-bottom:15px;
+            "
+        >
+            Build. Query. Analyze.
+        </h2>
+
+        <p
+            style="
+                color:var(--muted);
+                max-width:800px;
+                margin:auto;
+            "
+        >
+            A strong database foundation will help you in
+            Programming, BIS, Web Development, Cybersecurity,
+            Data Analytics and many other technology fields.
+        </p>
+
+        <div class="btns">
+
+            <a
+                href="../index.html#learning-center"
+                class="btn btn-primary"
+            >
+                ← Back to Learning Center
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <p>
+        © 2026
+        <strong>CyberShield</strong>
+        — Database Learning Center
+    </p>
+
+    <p>
+        Learn • Query • Design • Build
+    </p>
+
+</footer>
+
+
+</body>
+</html>

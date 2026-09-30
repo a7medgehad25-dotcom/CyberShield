@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberShield | Cybersecurity</title>
+
+    <style>
+        :root {
+            --bg: #06111f;
+            --surface: #0b1d31;
+            --surface2: #102840;
+            --primary: #00c8ff;
+            --primary-dark: #008fba;
+            --text: #edf9ff;
+            --muted: #a9c1d1;
+            --border: #19445e;
+            --success: #36d399;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(6, 17, 31, 0.96);
+            border-bottom: 1px solid var(--border);
+            padding: 18px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: var(--primary);
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        nav a {
+            color: var(--text);
+            text-decoration: none;
+            margin-left: 18px;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        .hero {
+            padding: 90px 7%;
+            text-align: center;
+            background:
+                radial-gradient(circle at top, #123b59 0%, transparent 55%),
+                var(--bg);
+        }
+
+        .hero .badge {
+            display: inline-block;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            padding: 7px 14px;
+            border-radius: 30px;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: clamp(40px, 7vw, 70px);
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            max-width: 800px;
+            margin: auto;
+            color: var(--muted);
+            font-size: 18px;
+        }
+
+        .container {
+            width: 86%;
+            max-width: 1250px;
+            margin: auto;
+        }
+
+        section {
+            padding: 70px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 38px;
+        }
+
+        .section-title h2 {
+            color: var(--primary);
+            font-size: 34px;
+            margin-bottom: 8px;
+        }
+
+        .section-title p {
+            color: var(--muted);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 15px;
+            padding: 25px;
+            transition: 0.25s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+        }
+
+        .card h3 {
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            color: var(--muted);
+        }
+
+        details {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            margin-bottom: 14px;
+            padding: 18px 22px;
+        }
+
+        summary {
+            cursor: pointer;
+            color: var(--primary);
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        details p,
+        details ul {
+            color: var(--muted);
+            margin-top: 14px;
+        }
+
+        details ul {
+            padding-left: 22px;
+        }
+
+        .resource-card {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 18px;
+        }
+
+        .resource-link {
+            display: inline-block;
+            text-align: center;
+            background: var(--primary);
+            color: #03101a;
+            padding: 10px 15px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .resource-link:hover {
+            background: #64ddff;
+        }
+
+        .roadmap {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 18px;
+        }
+
+        .step {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--primary);
+            padding: 23px;
+            border-radius: 12px;
+        }
+
+        .step span {
+            color: var(--success);
+            font-weight: bold;
+        }
+
+        .back {
+            text-align: center;
+            padding: 30px 0 70px;
+        }
+
+        .back a {
+            display: inline-block;
+            background: var(--primary);
+            color: #03101a;
+            padding: 13px 24px;
+            border-radius: 9px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            border-top: 1px solid var(--border);
+            color: var(--muted);
+            background: #040b13;
+        }
+
+        @media (max-width: 700px) {
+            header {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            nav {
+                text-align: center;
+            }
+
+            nav a {
+                margin: 0 6px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">🛡️ CyberShield</div>
+
+    <nav>
+        <a href="../index.html">Home</a>
+        <a href="../index.html#learning-center">Learning Center</a>
+    </nav>
+</header>
+
+<section class="hero">
+    <div class="badge">CyberShield Learning Center</div>
+    <h1>Cybersecurity</h1>
+    <p>
+        Learn cybersecurity from the fundamentals to practical defensive
+        concepts through notes, learning resources, videos, websites and a
+        structured roadmap.
+    </p>
+</section>
+
+<div class="container">
+
+    <!-- FUNDAMENTALS -->
+    <section>
+        <div class="section-title">
+            <h2>🔐 Core Fundamentals</h2>
+            <p>The concepts you should understand first.</p>
+        </div>
+
+        <div class="grid">
+
+            <div class="card">
+                <h3>CIA Triad</h3>
+                <p>
+                    Confidentiality, Integrity and Availability are three
+                    fundamental security objectives.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>Authentication</h3>
+                <p>
+                    Learn how systems verify identity using passwords,
+                    MFA and other authentication methods.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>Authorization</h3>
+                <p>
+                    Understand how permissions determine what an authenticated
+                    user is allowed to access.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>Threats & Risks</h3>
+                <p>
+                    Learn the difference between assets, threats,
+                    vulnerabilities and risks.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>Security Controls</h3>
+                <p>
+                    Explore preventive, detective and corrective controls
+                    used to reduce security risks.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>Security Awareness</h3>
+                <p>
+                    Learn why users and organizations need secure habits
+                    and security awareness.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- TOPICS -->
+    <section>
+        <div class="section-title">
+            <h2>🧠 Main Topics</h2>
+            <p>Explore important cybersecurity subjects.</p>
+        </div>
+
+        <div class="grid">
+
+            <div class="card">
+                <h3>🌐 Network Security</h3>
+                <p>
+                    IP addresses, ports, protocols, firewalls, VPNs and
+                    basic network defense.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>🦠 Malware</h3>
+                <p>
+                    Learn about common categories of malicious software
+                    and basic defensive concepts.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>🎣 Phishing</h3>
+                <p>
+                    Understand social engineering and how deceptive
+                    messages attempt to steal information.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>🔒 Cryptography</h3>
+                <p>
+                    Study encryption, hashing, keys, digital signatures
+                    and their security purposes.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>🖥️ System Security</h3>
+                <p>
+                    Learn about operating-system security, permissions,
+                    updates and secure configuration.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>☁️ Cloud Security</h3>
+                <p>
+                    Understand basic cloud security concepts,
+                    identity management and shared responsibility.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>🌐 Web Security</h3>
+                <p>
+                    Learn common web-security concepts and how developers
+                    can build safer applications.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>🚨 Incident Response</h3>
+                <p>
+                    Understand the general lifecycle of identifying,
+                    containing and recovering from security incidents.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- NOTES -->
+    <section id="notes">
+        <div class="section-title">
+            <h2>📝 Cybersecurity Notes</h2>
+            <p>Click any topic to open its notes.</p>
+        </div>
+
+        <details>
+            <summary>What is Cybersecurity?</summary>
+            <p>
+                Cybersecurity is the practice of protecting systems,
+                networks, applications and information from unauthorized
+                access, disruption, modification or destruction.
+            </p>
+        </details>
+
+        <details>
+            <summary>What is the CIA Triad?</summary>
+            <p>
+                The CIA Triad describes three major security objectives:
+                confidentiality protects information from unauthorized
+                disclosure, integrity protects it from unauthorized
+                modification, and availability helps ensure authorized
+                users can access resources when needed.
+            </p>
+        </details>
+
+        <details>
+            <summary>What is Phishing?</summary>
+            <p>
+                Phishing is a form of social engineering in which an attacker
+                attempts to deceive a person into revealing information or
+                interacting with malicious content.
+            </p>
+        </details>
+
+        <details>
+            <summary>What is MFA?</summary>
+            <p>
+                Multi-factor authentication requires more than one type of
+                authentication factor. It can add protection when a password
+                is compromised.
+            </p>
+        </details>
+
+        <details>
+            <summary>What is Malware?</summary>
+            <p>
+                Malware is software designed to perform malicious or
+                unauthorized actions. Examples include viruses, worms,
+                trojans and ransomware.
+            </p>
+        </details>
+
+        <details>
+            <summary>What is Encryption?</summary>
+            <p>
+                Encryption transforms readable information into a protected
+                form so that only authorized parties with the appropriate
+                key or mechanism can recover the original information.
+            </p>
+        </details>
+    </section>
+
+    <!-- ROADMAP -->
+    <section>
+        <div class="section-title">
+            <h2>🧭 Cybersecurity Roadmap</h2>
+            <p>A beginner-friendly learning path.</p>
+        </div>
+
+        <div class="roadmap">
+
+            <div class="step">
+                <span>STEP 01</span>
+                <h3>Computer Fundamentals</h3>
+                <p>
+                    Understand operating systems, files, processes,
+                    hardware and basic computing.
+                </p>
+            </div>
+
+            <div class="step">
+                <span>STEP 02</span>
+                <h3>Networking</h3>
+                <p>
+                    Study TCP/IP, DNS, HTTP, ports, protocols and
+                    basic network architecture.
+                </p>
+            </div>
+
+            <div class="step">
+                <span>STEP 03</span>
+                <h3>Security Fundamentals</h3>
+                <p>
+                    Learn CIA, authentication, authorization, threats,
+                    vulnerabilities and security controls.
+                </p>
+            </div>
+
+            <div class="step">
+                <span>STEP 04</span>
+                <h3>Operating Systems</h3>
+                <p>
+                    Build Linux and Windows fundamentals and understand
+                    permissions and system security.
+                </p>
+            </div>
+
+            <div class="step">
+                <span>STEP 05</span>
+                <h3>Web & Application Security</h3>
+                <p>
+                    Learn how applications work and study common
+                    defensive web-security concepts.
+                </p>
+            </div>
+
+            <div class="step">
+                <span>STEP 06</span>
+                <h3>Practical Learning</h3>
+                <p>
+                    Practice security concepts only in authorized
+                    educational labs and environments.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- VIDEOS -->
+    <section>
+        <div class="section-title">
+            <h2>🎥 Video Learning</h2>
+            <p>External learning resources.</p>
+        </div>
+
+        <div class="grid">
+
+            <div class="card resource-card">
+                <div>
+                    <h3>NIST Cybersecurity Framework</h3>
+                    <p>
+                        Official NIST resources explaining the Cybersecurity
+                        Framework and related learning materials.
+                    </p>
+                </div>
+
+                <a class="resource-link"
+                   href="https://www.nist.gov/cyberframework"
+                   target="_blank">
+                    Open NIST
+                </a>
+            </div>
+
+            <div class="card resource-card">
+                <div>
+                    <h3>Professor Messer</h3>
+                    <p>
+                        Free IT and security training videos covering
+                        certification-oriented fundamentals.
+                    </p>
+                </div>
+
+                <a class="resource-link"
+                   href="https://www.professormesser.com/"
+                   target="_blank">
+                    Open Videos
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- WEBSITES -->
+    <section>
+        <div class="section-title">
+            <h2>🌐 Useful Websites</h2>
+            <p>Reliable resources for continued learning.</p>
+        </div>
+
+        <div class="grid">
+
+            <div class="card resource-card">
+                <div>
+                    <h3>NIST</h3>
+                    <p>
+                        Standards, frameworks and cybersecurity guidance.
+                    </p>
+                </div>
+
+                <a class="resource-link"
+                   href="https://www.nist.gov/cyberframework"
+                   target="_blank">
+                    Visit NIST
+                </a>
+            </div>
+
+            <div class="card resource-card">
+                <div>
+                    <h3>CISA</h3>
+                    <p>
+                        Cybersecurity awareness and defensive guidance.
+                    </p>
+                </div>
+
+                <a class="resource-link"
+                   href="https://www.cisa.gov/"
+                   target="_blank">
+                    Visit CISA
+                </a>
+            </div>
+
+            <div class="card resource-card">
+                <div>
+                    <h3>OWASP</h3>
+                    <p>
+                        Application-security resources and educational
+                        material for developers and security learners.
+                    </p>
+                </div>
+
+                <a class="resource-link"
+                   href="https://owasp.org/"
+                   target="_blank">
+                    Visit OWASP
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- STUDY MATERIALS -->
+    <section>
+        <div class="section-title">
+            <h2>📄 Study Materials</h2>
+            <p>Official documents and reference material.</p>
+        </div>
+
+        <div class="grid">
+
+            <div class="card resource-card">
+                <div>
+                    <h3>NIST CSF 2.0</h3>
+                    <p>
+                        Official Cybersecurity Framework 2.0 publication
+                        and supporting resources.
+                    </p>
+                </div>
+
+                <a class="resource-link"
+                   href="https://www.nist.gov/cyberframework"
+                   target="_blank">
+                    Open Material
+                </a>
+            </div>
+
+            <div class="card resource-card">
+                <div>
+                    <h3>CISA Security Tips</h3>
+                    <p>
+                        Practical security-awareness material covering
+                        topics such as phishing, passwords and MFA.
+                    </p>
+                </div>
+
+                <a class="resource-link"
+                   href="https://www.cisa.gov/secure-our-world"
+                   target="_blank">
+                    Open Resources
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- PRACTICE -->
+    <section>
+        <div class="section-title">
+            <h2>🧪 Practice & Labs</h2>
+            <p>Learn safely through authorized educational environments.</p>
+        </div>
+
+        <div class="grid">
+
+            <div class="card">
+                <h3>Networking Practice</h3>
+                <p>
+                    Practice identifying networking concepts, protocols,
+                    ports and common defensive terminology.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>Security Analysis</h3>
+                <p>
+                    Analyze fictional security scenarios and identify
+                    assets, threats, vulnerabilities and controls.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>Web Security Learning</h3>
+                <p>
+                    Study web-security concepts using legitimate
+                    educational resources and authorized labs.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- BACK -->
+    <div class="back">
+        <a href="../index.html#learning-center">
+            ← Back to Learning Center
+        </a>
+    </div>
+
+</div>
+
+<footer>
+    <p>© 2026 CyberShield — Created by Ahmed Gehad Ali Hamouda</p>
+</footer>
+
+</body>
+</html>

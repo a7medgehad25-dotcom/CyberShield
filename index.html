@@ -1,0 +1,2390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberShield | Learning Platform</title>
+
+    <style>
+        :root {
+            --bg: #060b16;
+            --surface: #0d1424;
+            --surface2: #121d32;
+            --primary: #00d9ff;
+            --secondary: #7c5cff;
+            --accent: #65f5c7;
+            --text: #f4f8ff;
+            --muted: #a9b7cc;
+            --border: rgba(0, 217, 255, .18);
+            --danger: #ff5c7a;
+            --success: #48e09b;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background:
+                radial-gradient(circle at top right, rgba(124,92,255,.14), transparent 35%),
+                radial-gradient(circle at top left, rgba(0,217,255,.10), transparent 30%),
+                var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        button,
+        input,
+        select {
+            font: inherit;
+        }
+
+        .container {
+            width: min(1180px, 92%);
+            margin: auto;
+        }
+
+        /* NAVBAR */
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(6,11,22,.88);
+            backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        nav {
+            min-height: 72px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .logo {
+            font-size: 1.45rem;
+            font-weight: 800;
+            color: var(--primary);
+            white-space: nowrap;
+        }
+
+        .logo span {
+            color: var(--text);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 22px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--muted);
+            transition: .2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .lang-btn,
+        .login-btn,
+        .logout-btn {
+            border: 1px solid var(--border);
+            background: var(--surface);
+            color: var(--text);
+            padding: 9px 13px;
+            border-radius: 9px;
+            cursor: pointer;
+        }
+
+        .login-btn {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border: none;
+            font-weight: 700;
+        }
+
+        .logout-btn {
+            display: none;
+        }
+
+        /* HERO */
+
+        .hero {
+            min-height: 690px;
+            display: flex;
+            align-items: center;
+            padding: 80px 0;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.25fr .75fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 7px 13px;
+            border: 1px solid var(--border);
+            border-radius: 999px;
+            color: var(--accent);
+            background: rgba(0,217,255,.06);
+            margin-bottom: 20px;
+            font-size: .9rem;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            line-height: 1.05;
+            margin-bottom: 22px;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .hero p {
+            color: var(--muted);
+            font-size: 1.08rem;
+            max-width: 700px;
+            margin-bottom: 30px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 13px 20px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            cursor: pointer;
+            transition: .2s;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            font-weight: 700;
+        }
+
+        .btn-secondary {
+            background: var(--surface);
+            color: var(--text);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .hero-card {
+            background: linear-gradient(145deg, var(--surface2), var(--surface));
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 35px;
+            box-shadow: 0 25px 80px rgba(0,0,0,.3);
+        }
+
+        .shield {
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 25px;
+            display: grid;
+            place-items: center;
+            border-radius: 35px;
+            background: linear-gradient(145deg, rgba(0,217,255,.2), rgba(124,92,255,.2));
+            border: 1px solid var(--border);
+            font-size: 5rem;
+        }
+
+        .hero-card h3 {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .hero-card p {
+            text-align: center;
+            margin: 0;
+            font-size: .95rem;
+        }
+
+        /* SECTIONS */
+
+        section {
+            padding: 85px 0;
+        }
+
+        .section-heading {
+            text-align: center;
+            max-width: 760px;
+            margin: 0 auto 45px;
+        }
+
+        .section-heading h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: 12px;
+        }
+
+        .section-heading p {
+            color: var(--muted);
+        }
+
+        /* STATS */
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+        }
+
+        .stat {
+            padding: 25px;
+            text-align: center;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+        }
+
+        .stat strong {
+            display: block;
+            color: var(--primary);
+            font-size: 2rem;
+        }
+
+        .stat span {
+            color: var(--muted);
+        }
+
+        /* LEARNING CENTER */
+
+        .learning-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .learning-card {
+            position: relative;
+            padding: 28px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            transition: .25s;
+            overflow: hidden;
+        }
+
+        .learning-card::before {
+            content: "";
+            position: absolute;
+            inset: 0 0 auto 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+        }
+
+        .learning-card:hover {
+            transform: translateY(-7px);
+            border-color: rgba(0,217,255,.45);
+        }
+
+        .learning-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .learning-card h3 {
+            margin-bottom: 10px;
+        }
+
+        .learning-card p {
+            color: var(--muted);
+            margin-bottom: 20px;
+        }
+
+        .open-page {
+            display: inline-block;
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        /* FEATURES */
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .feature {
+            padding: 25px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+        }
+
+        .feature h3 {
+            margin-bottom: 8px;
+        }
+
+        .feature p {
+            color: var(--muted);
+        }
+
+        /* ROADMAP */
+
+        .roadmap {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+        }
+
+        .step {
+            padding: 25px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 15px;
+        }
+
+        .step-number {
+            width: 42px;
+            height: 42px;
+            display: grid;
+            place-items: center;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .step p {
+            color: var(--muted);
+        }
+
+        /* RESOURCES */
+
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .resource {
+            padding: 23px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 15px;
+        }
+
+        .resource h3 {
+            margin-bottom: 8px;
+        }
+
+        .resource p {
+            color: var(--muted);
+            margin-bottom: 14px;
+        }
+
+        .resource a {
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        /* QUIZ */
+
+        .quiz-box {
+            max-width: 800px;
+            margin: auto;
+            padding: 35px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+        }
+
+        .quiz-question {
+            margin-bottom: 25px;
+        }
+
+        .quiz-question h3 {
+            margin-bottom: 15px;
+        }
+
+        .quiz-option {
+            display: block;
+            width: 100%;
+            text-align: left;
+            padding: 13px;
+            margin: 8px 0;
+            border: 1px solid var(--border);
+            background: var(--surface2);
+            color: var(--text);
+            border-radius: 9px;
+            cursor: pointer;
+        }
+
+        .quiz-option:hover {
+            border-color: var(--primary);
+        }
+
+        #quiz-result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        /* ABOUT */
+
+        .about-box {
+            max-width: 850px;
+            margin: auto;
+            padding: 40px;
+            background: linear-gradient(145deg, var(--surface2), var(--surface));
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            text-align: center;
+        }
+
+        .about-box p {
+            color: var(--muted);
+            margin-top: 15px;
+        }
+
+        /* AUTH */
+
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 2000;
+            background: rgba(0,0,0,.75);
+            backdrop-filter: blur(8px);
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .auth-box {
+            width: min(480px, 100%);
+            max-height: 90vh;
+            overflow-y: auto;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 30px;
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            right: 18px;
+            top: 14px;
+            background: none;
+            border: none;
+            color: var(--muted);
+            font-size: 1.8rem;
+            cursor: pointer;
+        }
+
+        .auth-box h2 {
+            margin-bottom: 8px;
+        }
+
+        .auth-subtitle {
+            color: var(--muted);
+            margin-bottom: 25px;
+        }
+
+        .auth-group {
+            margin-bottom: 15px;
+        }
+
+        .auth-group label {
+            display: block;
+            margin-bottom: 7px;
+        }
+
+        .auth-group input {
+            width: 100%;
+            padding: 13px;
+            border-radius: 9px;
+            border: 1px solid var(--border);
+            background: var(--bg);
+            color: white;
+            outline: none;
+        }
+
+        .auth-group input:focus {
+            border-color: var(--primary);
+        }
+
+        .auth-button {
+            width: 100%;
+            padding: 13px;
+            border: none;
+            border-radius: 9px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 5px;
+        }
+
+        .otp-section {
+            display: none;
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+        }
+
+        .otp-section.active {
+            display: block;
+        }
+
+        .message {
+            margin-top: 13px;
+            font-size: .95rem;
+        }
+
+        .success {
+            color: var(--success);
+        }
+
+        .error {
+            color: var(--danger);
+        }
+
+        .demo-info {
+            margin-top: 20px;
+            padding: 12px;
+            border-radius: 8px;
+            background: rgba(0,217,255,.06);
+            color: var(--muted);
+            font-size: .85rem;
+        }
+
+        /* FOOTER */
+
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 35px 0;
+            color: var(--muted);
+            text-align: center;
+        }
+
+        /* RTL */
+
+        body.rtl {
+            direction: rtl;
+        }
+
+        body.rtl .quiz-option {
+            text-align: right;
+        }
+
+        body.rtl .close-modal {
+            right: auto;
+            left: 18px;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 900px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .learning-grid,
+            .feature-grid,
+            .resources-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .roadmap {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .learning-grid,
+            .feature-grid,
+            .resources-grid,
+            .roadmap,
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            nav {
+                flex-wrap: wrap;
+                padding: 12px 0;
+            }
+
+            .hero {
+                min-height: auto;
+            }
+
+            section {
+                padding: 60px 0;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="container">
+        <nav>
+            <a href="#home" class="logo">🛡️ Cyber<span>Shield</span></a>
+
+            <ul class="nav-links">
+                <li><a href="#home" data-en="Home" data-ar="الرئيسية">Home</a></li>
+                <li><a href="#learning" data-en="Learning Center" data-ar="مركز التعلم">Learning Center</a></li>
+                <li><a href="#roadmap" data-en="Roadmap" data-ar="الخطة التعليمية">Roadmap</a></li>
+                <li><a href="#resources" data-en="Resources" data-ar="المصادر">Resources</a></li>
+                <li><a href="#quiz" data-en="Quiz" data-ar="اختبار">Quiz</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <button class="lang-btn" id="languageBtn">العربية</button>
+                <button class="login-btn" id="loginBtn" data-en="Login" data-ar="تسجيل الدخول">Login</button>
+                <button class="logout-btn" id="logoutBtn" data-en="Logout" data-ar="تسجيل الخروج">Logout</button>
+            </div>
+        </nav>
+    </div>
+</header>
+
+<main>
+
+    <!-- HOME -->
+
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-grid">
+
+                <div>
+                    <span class="badge"
+                          data-en="Cybersecurity • BIS • Technology"
+                          data-ar="الأمن السيبراني • BIS • التكنولوجيا">
+                        Cybersecurity • BIS • Technology
+                    </span>
+
+                    <h1>
+                        Learn.
+                        <span>Build.</span>
+                        Protect.
+                    </h1>
+
+                    <p data-en="CyberShield is an educational platform designed to help students learn cybersecurity, BIS, programming, databases, web development and networking through structured learning paths and real resources."
+                       data-ar="CyberShield منصة تعليمية تساعد الطلاب على تعلم الأمن السيبراني وBIS والبرمجة وقواعد البيانات وتطوير الويب والشبكات من خلال مسارات تعليمية منظمة ومصادر حقيقية.">
+                        CyberShield is an educational platform designed to help students learn cybersecurity, BIS,
+                        programming, databases, web development and networking through structured learning paths and
+                        real resources.
+                    </p>
+
+                    <div class="hero-buttons">
+                        <a href="#learning" class="btn btn-primary"
+                           data-en="Explore Learning Center"
+                           data-ar="استكشف مركز التعلم">
+                            Explore Learning Center
+                        </a>
+
+                        <button class="btn btn-secondary" id="heroLogin"
+                                data-en="Create / Login"
+                                data-ar="تسجيل / دخول">
+                            Create / Login
+                        </button>
+                    </div>
+                </div>
+
+                <div class="hero-card">
+                    <div class="shield">🛡️</div>
+                    <h3>CyberShield</h3>
+                    <p data-en="Your educational technology hub."
+                       data-ar="منصتك التعليمية للتكنولوجيا والأمن السيبراني.">
+                        Your educational technology hub.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- STATS -->
+
+    <section>
+        <div class="container">
+            <div class="stats">
+                <div class="stat">
+                    <strong>6</strong>
+                    <span data-en="Learning Tracks" data-ar="مسارات تعليمية">Learning Tracks</span>
+                </div>
+
+                <div class="stat">
+                    <strong>20+</strong>
+                    <span data-en="Real Resources" data-ar="مصدر حقيقي">Real Resources</span>
+                </div>
+
+                <div class="stat">
+                    <strong>8</strong>
+                    <span data-en="Roadmap Stages" data-ar="مراحل تعليمية">Roadmap Stages</span>
+                </div>
+
+                <div class="stat">
+                    <strong>24/7</strong>
+                    <span data-en="Self Learning" data-ar="تعلم ذاتي">Self Learning</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LEARNING CENTER -->
+
+    <section id="learning">
+        <div class="container">
+
+            <div class="section-heading">
+                <h2 data-en="Learning Center" data-ar="مركز التعلم">Learning Center</h2>
+
+                <p data-en="Choose a complete learning track. Every card opens its own dedicated educational page."
+                   data-ar="اختر مسارًا تعليميًا متكاملًا. كل بطاقة تفتح صفحة تعليمية مستقلة.">
+                    Choose a complete learning track. Every card opens its own dedicated educational page.
+                </p>
+            </div>
+
+            <div class="learning-grid">
+
+                <a class="learning-card" href="pages/cybersecurity.html">
+                    <div class="learning-icon">🛡️</div>
+                    <h3 data-en="Cybersecurity" data-ar="الأمن السيبراني">Cybersecurity</h3>
+                    <p data-en="Security fundamentals, threats, cryptography, web security and incident response."
+                       data-ar="أساسيات الأمن والتهديدات والتشفير وأمن الويب والاستجابة للحوادث.">
+                        Security fundamentals, threats, cryptography, web security and incident response.
+                    </p>
+                    <span class="open-page" data-en="Open Course →" data-ar="فتح المسار ←">Open Course →</span>
+                </a>
+
+                <a class="learning-card" href="pages/bis.html">
+                    <div class="learning-icon">💼</div>
+                    <h3 data-en="BIS" data-ar="نظم معلومات الأعمال">BIS</h3>
+                    <p data-en="Business, management, accounting, information systems, databases and analytics."
+                       data-ar="الأعمال والإدارة والمحاسبة ونظم المعلومات وقواعد البيانات وتحليل البيانات.">
+                        Business, management, accounting, information systems, databases and analytics.
+                    </p>
+                    <span class="open-page" data-en="Open Course →" data-ar="فتح المسار ←">Open Course →</span>
+                </a>
+
+                <a class="learning-card" href="pages/programming.html">
+                    <div class="learning-icon">💻</div>
+                    <h3 data-en="Programming" data-ar="البرمجة">Programming</h3>
+                    <p data-en="Python, C, JavaScript, algorithms, data structures, OOP and projects."
+                       data-ar="Python وC وJavaScript والخوارزميات وهياكل البيانات والبرمجة الكائنية والمشاريع.">
+                        Python, C, JavaScript, algorithms, data structures, OOP and projects.
+                    </p>
+                    <span class="open-page" data-en="Open Course →" data-ar="فتح المسار ←">Open Course →</span>
+                </a>
+
+                <a class="learning-card" href="pages/databases.html">
+                    <div class="learning-icon">🗄️</div>
+                    <h3 data-en="Databases" data-ar="قواعد البيانات">Databases</h3>
+                    <p data-en="SQL, relational databases, keys, relationships, joins, design and optimization."
+                       data-ar="SQL وقواعد البيانات العلائقية والمفاتيح والعلاقات وJOIN وتصميم وتحسين قواعد البيانات.">
+                        SQL, relational databases, keys, relationships, joins, design and optimization.
+                    </p>
+                    <span class="open-page" data-en="Open Course →" data-ar="فتح المسار ←">Open Course →</span>
+                </a>
+
+                <a class="learning-card" href="pages/web-development.html">
+                    <div class="learning-icon">🌐</div>
+                    <h3 data-en="Web Development" data-ar="تطوير الويب">Web Development</h3>
+                    <p data-en="HTML, CSS, JavaScript, DOM, APIs, responsive design and backend fundamentals."
+                       data-ar="HTML وCSS وJavaScript وDOM وAPIs والتصميم المتجاوب وأساسيات Backend.">
+                        HTML, CSS, JavaScript, DOM, APIs, responsive design and backend fundamentals.
+                    </p>
+                    <span class="open-page" data-en="Open Course →" data-ar="فتح المسار ←">Open Course →</span>
+                </a>
+
+                <a class="learning-card" href="pages/networking.html">
+                    <div class="learning-icon">🌐</div>
+                    <h3 data-en="Networking" data-ar="الشبكات">Networking</h3>
+                    <p data-en="IP addressing, DNS, DHCP, routers, switches, TCP/UDP and network security."
+                       data-ar="عناوين IP وDNS وDHCP والراوترات والسويتشات وTCP/UDP وأمن الشبكات.">
+                        IP addressing, DNS, DHCP, routers, switches, TCP/UDP and network security.
+                    </p>
+                    <span class="open-page" data-en="Open Course →" data-ar="فتح المسار ←">Open Course →</span>
+                </a>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURES -->
+
+    <section>
+        <div class="container">
+
+            <div class="section-heading">
+                <h2 data-en="What You Can Build" data-ar="ماذا يمكنك أن تبني؟">
+                    What You Can Build
+                </h2>
+
+                <p data-en="CyberShield connects knowledge with practical projects."
+                   data-ar="CyberShield يربط المعرفة بالمشاريع العملية.">
+                    CyberShield connects knowledge with practical projects.
+                </p>
+            </div>
+
+            <div class="feature-grid">
+
+                <div class="feature">
+                    <h3>🛡️ Cybersecurity</h3>
+                    <p data-en="Understand defensive security concepts and security awareness."
+                       data-ar="تعلم مفاهيم الأمن الدفاعي والتوعية الأمنية.">
+                        Understand defensive security concepts and security awareness.
+                    </p>
+                </div>
+
+                <div class="feature">
+                    <h3>💻 Programming</h3>
+                    <p data-en="Learn programming concepts and turn them into real applications."
+                       data-ar="تعلم مفاهيم البرمجة وحولها إلى تطبيقات حقيقية.">
+                        Learn programming concepts and turn them into real applications.
+                    </p>
+                </div>
+
+                <div class="feature">
+                    <h3>🗄️ Databases</h3>
+                    <p data-en="Design databases and use SQL to work with structured data."
+                       data-ar="صمم قواعد البيانات واستخدم SQL للتعامل مع البيانات المنظمة.">
+                        Design databases and use SQL to work with structured data.
+                    </p>
+                </div>
+
+                <div class="feature">
+                    <h3>🌐 Web</h3>
+                    <p data-en="Build responsive websites using modern web technologies."
+                       data-ar="أنشئ مواقع متجاوبة باستخدام تقنيات الويب الحديثة.">
+                        Build responsive websites using modern web technologies.
+                    </p>
+                </div>
+
+                <div class="feature">
+                    <h3>📡 Networking</h3>
+                    <p data-en="Understand how devices communicate across networks."
+                       data-ar="افهم كيفية تواصل الأجهزة عبر الشبكات.">
+                        Understand how devices communicate across networks.
+                    </p>
+                </div>
+
+                <div class="feature">
+                    <h3>💼 BIS</h3>
+                    <p data-en="Connect business knowledge with information technology."
+                       data-ar="اربط المعرفة التجارية بتكنولوجيا المعلومات.">
+                        Connect business knowledge with information technology.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ROADMAP -->
+
+    <section id="roadmap">
+        <div class="container">
+
+            <div class="section-heading">
+                <h2 data-en="CyberShield Roadmap" data-ar="خطة CyberShield">
+                    CyberShield Roadmap
+                </h2>
+
+                <p data-en="A simple path from fundamentals to real projects."
+                   data-ar="مسار بسيط من الأساسيات حتى المشاريع الحقيقية.">
+                    A simple path from fundamentals to real projects.
+                </p>
+            </div>
+
+            <div class="roadmap">
+
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3 data-en="Fundamentals" data-ar="الأساسيات">Fundamentals</h3>
+                    <p data-en="Computer and technology basics."
+                       data-ar="أساسيات الكمبيوتر والتكنولوجيا.">
+                        Computer and technology basics.
+                    </p>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3 data-en="Programming" data-ar="البرمجة">Programming</h3>
+                    <p data-en="Build problem-solving and coding skills."
+                       data-ar="ابنِ مهارات حل المشكلات والبرمجة.">
+                        Build problem-solving and coding skills.
+                    </p>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3 data-en="Databases" data-ar="قواعد البيانات">Databases</h3>
+                    <p data-en="Learn SQL and database design."
+                       data-ar="تعلم SQL وتصميم قواعد البيانات.">
+                        Learn SQL and database design.
+                    </p>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3 data-en="Web Development" data-ar="تطوير الويب">Web Development</h3>
+                    <p data-en="Build websites and web applications."
+                       data-ar="أنشئ مواقع وتطبيقات ويب.">
+                        Build websites and web applications.
+                    </p>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">5</div>
+                    <h3 data-en="Networking" data-ar="الشبكات">Networking</h3>
+                    <p data-en="Understand communication between systems."
+                       data-ar="افهم الاتصال بين الأنظمة.">
+                        Understand communication between systems.
+                    </p>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">6</div>
+                    <h3 data-en="Cybersecurity" data-ar="الأمن السيبراني">Cybersecurity</h3>
+                    <p data-en="Apply security principles to technology."
+                       data-ar="طبق مبادئ الأمن على التكنولوجيا.">
+                        Apply security principles to technology.
+                    </p>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">7</div>
+                    <h3 data-en="Projects" data-ar="المشاريع">Projects</h3>
+                    <p data-en="Turn your knowledge into practical projects."
+                       data-ar="حول معرفتك إلى مشاريع عملية.">
+                        Turn your knowledge into practical projects.
+                    </p>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">8</div>
+                    <h3 data-en="Portfolio" data-ar="معرض الأعمال">Portfolio</h3>
+                    <p data-en="Document and present what you build."
+                       data-ar="وثق واعرض المشاريع التي تبنيها.">
+                        Document and present what you build.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- RESOURCES -->
+
+    <section id="resources">
+        <div class="container">
+
+            <div class="section-heading">
+                <h2 data-en="Real Learning Resources" data-ar="مصادر تعليمية حقيقية">
+                    Real Learning Resources
+                </h2>
+
+                <p data-en="External resources from established educational and technology organizations."
+                   data-ar="مصادر خارجية من جهات تعليمية وتقنية معروفة.">
+                    External resources from established educational and technology organizations.
+                </p>
+            </div>
+
+            <div class="resources-grid">
+
+                <div class="resource">
+                    <h3>🎓 Harvard CS50</h3>
+                    <p data-en="Harvard's computer science courses."
+                       data-ar="دورات علوم الكمبيوتر من جامعة هارفارد.">
+                        Harvard's computer science courses.
+                    </p>
+                    <a href="https://cs50.harvard.edu/" target="_blank" rel="noopener">
+                        Open Resource →
+                    </a>
+                </div>
+
+                <div class="resource">
+                    <h3>🐍 CS50 Python</h3>
+                    <p data-en="Harvard's introduction to programming with Python."
+                       data-ar="مقدمة هارفارد للبرمجة باستخدام Python.">
+                        Harvard's introduction to programming with Python.
+                    </p>
+                    <a href="https://cs50.harvard.edu/python/" target="_blank" rel="noopener">
+                        Open Course →
+                    </a>
+                </div>
+
+                <div class="resource">
+                    <h3>🌐 MDN Web Docs</h3>
+                    <p data-en="Technical documentation for web technologies."
+                       data-ar="توثيق تقني لتقنيات الويب.">
+                        Technical documentation for web technologies.
+                    </p>
+                    <a href="https://developer.mozilla.org/en-US/docs/Web" target="_blank" rel="noopener">
+                        Open MDN →
+                    </a>
+                </div>
+
+                <div class="resource">
+                    <h3>💻 freeCodeCamp</h3>
+                    <p data-en="Free interactive programming and web development learning."
+                       data-ar="تعلم مجاني تفاعلي للبرمجة وتطوير الويب.">
+                        Free interactive programming and web development learning.
+                    </p>
+                    <a href="https://www.freecodecamp.org/learn/" target="_blank" rel="noopener">
+                        Start Learning →
+                    </a>
+                </div>
+
+                <div class="resource">
+                    <h3>🛡️ NIST</h3>
+                    <p data-en="Cybersecurity frameworks and guidance."
+                       data-ar="أطر وإرشادات الأمن السيبراني.">
+                        Cybersecurity frameworks and guidance.
+                    </p>
+                    <a href="https://www.nist.gov/cyberframework" target="_blank" rel="noopener">
+                        Open NIST →
+                    </a>
+                </div>
+
+                <div class="resource">
+                    <h3>🔐 OWASP</h3>
+                    <p data-en="Resources for web application security."
+                       data-ar="مصادر لأمن تطبيقات الويب.">
+                        Resources for web application security.
+                    </p>
+                    <a href="https://owasp.org/" target="_blank" rel="noopener">
+                        Open OWASP →
+                    </a>
+                </div>
+
+                <div class="resource">
+                    <h3>📡 Cisco Networking Academy</h3>
+                    <p data-en="Networking and technology learning resources."
+                       data-ar="مصادر لتعلم الشبكات والتكنولوجيا.">
+                        Networking and technology learning resources.
+                    </p>
+                    <a href="https://www.netacad.com/" target="_blank" rel="noopener">
+                        Open Cisco →
+                    </a>
+                </div>
+
+                <div class="resource">
+                    <h3>🗄️ W3Schools SQL</h3>
+                    <p data-en="Interactive SQL learning and examples."
+                       data-ar="تعلم SQL بطريقة تفاعلية مع أمثلة."
+                       >
+                        Interactive SQL learning and examples.
+                    </p>
+                    <a href="https://www.w3schools.com/sql/" target="_blank" rel="noopener">
+                        Learn SQL →
+                    </a>
+                </div>
+
+                <div class="resource">
+                    <h3>☁️ Cloudflare Learning</h3>
+                    <p data-en="Learning resources about networking, DNS and security."
+                       data-ar="مصادر عن الشبكات وDNS والأمن.">
+                        Learning resources about networking, DNS and security.
+                    </p>
+                    <a href="https://www.cloudflare.com/learning/" target="_blank" rel="noopener">
+                        Open Cloudflare →
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- QUIZ -->
+
+    <section id="quiz">
+        <div class="container">
+
+            <div class="section-heading">
+                <h2 data-en="Cybersecurity Quiz" data-ar="اختبار الأمن السيبراني">
+                    Cybersecurity Quiz
+                </h2>
+
+                <p data-en="Test a few fundamental cybersecurity concepts."
+                   data-ar="اختبر معلوماتك في بعض أساسيات الأمن السيبراني.">
+                    Test a few fundamental cybersecurity concepts.
+                </p>
+            </div>
+
+            <div class="quiz-box">
+
+                <div class="quiz-question">
+                    <h3 data-en="1. What does the C in CIA Triad represent?"
+                        data-ar="١. ماذا يمثل الحرف C في مثلث CIA؟">
+                        1. What does the C in CIA Triad represent?
+                    </h3>
+
+                    <button class="quiz-option" onclick="checkAnswer(this, false)">
+                        Availability
+                    </button>
+
+                    <button class="quiz-option" onclick="checkAnswer(this, true)">
+                        Confidentiality
+                    </button>
+
+                    <button class="quiz-option" onclick="checkAnswer(this, false)">
+                        Authentication
+                    </button>
+                </div>
+
+                <div id="quiz-result"></div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT CREATOR -->
+
+    <section id="about">
+        <div class="container">
+
+            <div class="section-heading">
+                <h2 data-en="About Creator" data-ar="عن المطور">
+                    About Creator
+                </h2>
+            </div>
+
+            <div class="about-box">
+                <h2>Ahmed Gehad Ali Hamouda</h2>
+
+                <p data-en="CyberShield is an educational project focused on technology, cybersecurity, BIS and practical learning."
+                   data-ar="CyberShield مشروع تعليمي يركز على التكنولوجيا والأمن السيبراني وBIS والتعلم العملي.">
+                    CyberShield is an educational project focused on technology,
+                    cybersecurity, BIS and practical learning.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+</main>
+
+<footer>
+    <div class="container">
+        <p>
+            © 2026 CyberShield —
+            <span data-en="Educational Technology Platform"
+                  data-ar="منصة تعليمية تقنية">
+                Educational Technology Platform
+            </span>
+        </p>
+    </div>
+</footer>
+
+<!-- AUTH MODAL -->
+
+<div class="modal" id="authModal">
+
+    <div class="auth-box">
+
+        <button class="close-modal" id="closeModal">×</button>
+
+        <h2 data-en="CyberShield Account" data-ar="حساب CyberShield">
+            CyberShield Account
+        </h2>
+
+       <p class="auth-subtitle"
+   data-en="Secure login and phone verification"
+   data-ar="تسجيل دخول آمن والتحقق من الهاتف">
+    Secure login and phone verification
+</p>
+        <!-- LOGIN -->
+
+        <div id="loginSection">
+
+            <div class="auth-group">
+                <label data-en="Username" data-ar="اسم المستخدم">
+                    Username
+                </label>
+
+                <input
+                    type="text"
+                    id="username"
+                    placeholder="Enter username">
+            </div>
+
+            <div class="auth-group">
+                <label data-en="Password" data-ar="كلمة المرور">
+                    Password
+                </label>
+
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="Enter password">
+            </div>
+
+            <button class="auth-button" onclick="loginUser()"
+                    data-en="Login"
+                    data-ar="تسجيل الدخول">
+                Login
+            </button>
+
+            <div id="loginMessage" class="message"></div>
+
+            <div class="demo-info">
+                <strong>Demo account:</strong><br>
+                Username: <b>admin</b><br>
+                Password: <b>CyberShield123</b>
+            </div>
+
+        </div>
+
+        <!-- PHONE OTP -->
+
+        <div class="otp-section" id="otpSection">
+
+            <div class="auth-group">
+                <label data-en="Phone Number" data-ar="رقم الهاتف">
+                    Phone Number
+                </label>
+
+                <input
+                    type="tel"
+                    id="phone"
+                    placeholder="+20xxxxxxxxxx">
+            </div>
+
+            <button class="auth-button"
+                    onclick="sendOTP()"
+                    data-en="Send Verification Code"
+                    data-ar="إرسال كود التحقق">
+                Send Verification Code
+            </button>
+
+            <div id="sendMessage" class="message"></div>
+
+            <div class="auth-group" style="margin-top:18px;">
+                <label data-en="Verification Code"
+                       data-ar="كود التحقق">
+                    Verification Code
+                </label>
+
+                <input
+                    type="text"
+                    id="otpCode"
+                    maxlength="6"
+                    inputmode="numeric"
+                    placeholder="Enter code">
+            </div>
+
+            <button class="auth-button"
+                    onclick="verifyOTP()"
+                    data-en="Verify"
+                    data-ar="تحقق">
+                Verify
+            </button>
+
+            <div id="verifyMessage" class="message"></div>
+
+        </div>
+
+    </div>
+</div>
+<script>
+
+    /* =========================
+       ELEMENTS
+    ========================= */
+
+    const languageBtn = document.getElementById("languageBtn");
+    const loginBtn = document.getElementById("loginBtn");
+    const logoutBtn = document.getElementById("logoutBtn");
+    const heroLogin = document.getElementById("heroLogin");
+    const authModal = document.getElementById("authModal");
+    const closeModal = document.getElementById("closeModal");
+
+
+    /* =========================
+       LANGUAGE
+    ========================= */
+
+    let currentLanguage =
+        localStorage.getItem("cybershieldLanguage") || "en";
+
+    function updateLanguage() {
+
+        document.querySelectorAll("[data-en][data-ar]").forEach(element => {
+
+            element.textContent =
+                currentLanguage === "en"
+                    ? element.getAttribute("data-en")
+                    : element.getAttribute("data-ar");
+
+        });
+
+        document.querySelectorAll("[placeholder]").forEach(element => {
+
+            if (element.id === "username") {
+                element.placeholder =
+                    currentLanguage === "en"
+                        ? "Enter username"
+                        : "اكتب اسم المستخدم";
+            }
+
+            if (element.id === "password") {
+                element.placeholder =
+                    currentLanguage === "en"
+                        ? "Enter password"
+                        : "اكتب كلمة المرور";
+            }
+
+            if (element.id === "phone") {
+                element.placeholder = "+20xxxxxxxxxx";
+            }
+
+            if (element.id === "otpCode") {
+                element.placeholder =
+                    currentLanguage === "en"
+                        ? "Enter code"
+                        : "اكتب الكود";
+            }
+
+        });
+
+        languageBtn.textContent =
+            currentLanguage === "en"
+                ? "العربية"
+                : "English";
+
+        document.body.classList.toggle(
+            "rtl",
+            currentLanguage === "ar"
+        );
+
+        localStorage.setItem(
+            "cybershieldLanguage",
+            currentLanguage
+        );
+    }
+
+    languageBtn.addEventListener("click", () => {
+
+        currentLanguage =
+            currentLanguage === "en"
+                ? "ar"
+                : "en";
+
+        updateLanguage();
+    });
+
+    updateLanguage();
+
+
+    /* =========================
+       AUTH MODAL
+    ========================= */
+
+    function openAuth() {
+        authModal.classList.add("active");
+    }
+
+    function closeAuth() {
+        authModal.classList.remove("active");
+    }
+
+    loginBtn.addEventListener("click", openAuth);
+    heroLogin.addEventListener("click", openAuth);
+    closeModal.addEventListener("click", closeAuth);
+
+    authModal.addEventListener("click", event => {
+
+        if (event.target === authModal) {
+            closeAuth();
+        }
+
+    });
+
+
+    /* =========================
+       CREATE ACCOUNT BUTTON
+    ========================= */
+
+    const loginMessage =
+        document.getElementById("loginMessage");
+
+    const passwordInput =
+        document.getElementById("password");
+
+    if (loginMessage && passwordInput) {
+
+        const registerButton =
+            document.createElement("button");
+
+        registerButton.type = "button";
+
+        registerButton.textContent =
+            currentLanguage === "en"
+                ? "Create Account"
+                : "إنشاء حساب";
+
+        registerButton.style.marginTop = "10px";
+        registerButton.style.width = "100%";
+        registerButton.style.padding = "10px";
+        registerButton.style.borderRadius = "8px";
+        registerButton.style.border =
+            "1px solid rgba(0,217,255,.3)";
+        registerButton.style.background =
+            "transparent";
+        registerButton.style.color =
+            "inherit";
+        registerButton.style.cursor =
+            "pointer";
+
+        registerButton.addEventListener(
+            "click",
+            registerAccount
+        );
+
+        passwordInput.parentElement.appendChild(
+            registerButton
+        );
+
+    }
+
+
+    /* =========================
+       DEMO ACCOUNT STORAGE
+    ========================= */
+
+    function getDemoAccounts() {
+
+        try {
+
+            return JSON.parse(
+                localStorage.getItem(
+                    "cybershieldDemoAccounts"
+                )
+            ) || [];
+
+        } catch (error) {
+
+            return [];
+
+        }
+
+    }
+
+
+    function saveDemoAccounts(accounts) {
+
+        localStorage.setItem(
+            "cybershieldDemoAccounts",
+            JSON.stringify(accounts)
+        );
+
+    }
+
+
+    /* =========================
+       LOGIN
+    ========================= */
+
+    async function loginUser() {
+
+        const username =
+            document.getElementById("username")
+                .value.trim();
+
+        const password =
+            document.getElementById("password")
+                .value;
+
+        const message =
+            document.getElementById("loginMessage");
+
+        if (!username || !password) {
+
+            message.textContent =
+                currentLanguage === "en"
+                    ? "Enter your username and password."
+                    : "اكتب اسم المستخدم وكلمة المرور.";
+
+            message.className =
+                "message error";
+
+            return;
+        }
+
+        try {
+
+            const response =
+                await fetch("/login", {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+
+                    body: JSON.stringify({
+                        username: username,
+                        password: password
+                    })
+                });
+
+            const data =
+                await response.json();
+
+            if (data.success) {
+
+                completeLogin(
+                    data.user.username
+                );
+
+                message.textContent =
+                    currentLanguage === "en"
+                        ? "Login successful. Phone verification is ready."
+                        : "تم تسجيل الدخول بنجاح. التحقق من الهاتف جاهز.";
+
+                message.className =
+                    "message success";
+
+            } else {
+
+                message.textContent =
+                    data.message ||
+                    (
+                        currentLanguage === "en"
+                            ? "Invalid username or password."
+                            : "اسم المستخدم أو كلمة المرور غير صحيحة."
+                    );
+
+                message.className =
+                    "message error";
+            }
+
+        } catch (error) {
+
+            /* =========================
+               DEMO LOGIN FALLBACK
+            ========================= */
+
+            const accounts =
+                getDemoAccounts();
+
+            const demoUser =
+                accounts.find(
+                    account =>
+                        account.username.toLowerCase() ===
+                        username.toLowerCase() &&
+                        account.password === password
+                );
+
+            if (demoUser) {
+
+                completeLogin(
+                    demoUser.username
+                );
+
+                message.textContent =
+                    currentLanguage === "en"
+                        ? "Demo login successful."
+                        : "تم تسجيل الدخول بنجاح في الوضع التجريبي.";
+
+                message.className =
+                    "message success";
+
+            } else {
+
+                message.textContent =
+                    currentLanguage === "en"
+                        ? "Account not found. Create a Demo Account first."
+                        : "الحساب غير موجود. أنشئ حسابًا تجريبيًا أولًا.";
+
+                message.className =
+                    "message error";
+            }
+
+        }
+
+    }
+
+
+    /* =========================
+       COMPLETE LOGIN
+    ========================= */
+
+    function completeLogin(username) {
+
+        localStorage.setItem(
+            "cybershieldLoggedIn",
+            "true"
+        );
+
+        localStorage.setItem(
+            "cybershieldUsername",
+            username
+        );
+
+        document.getElementById("otpSection")
+            .classList.add("active");
+
+        loginBtn.style.display = "none";
+        logoutBtn.style.display = "block";
+
+    }
+
+
+    /* =========================
+       CREATE ACCOUNT
+    ========================= */
+
+    async function registerAccount() {
+
+        const username =
+            document.getElementById("username")
+                .value.trim();
+
+        const password =
+            document.getElementById("password")
+                .value;
+
+        const message =
+            document.getElementById("loginMessage");
+
+        if (!username || !password) {
+
+            message.textContent =
+                currentLanguage === "en"
+                    ? "Enter a username and password first."
+                    : "اكتب اسم المستخدم وكلمة المرور أولًا.";
+
+            message.className =
+                "message error";
+
+            return;
+        }
+
+        if (username.length < 3) {
+
+            message.textContent =
+                currentLanguage === "en"
+                    ? "Username must be at least 3 characters."
+                    : "اسم المستخدم يجب أن يكون 3 أحرف على الأقل.";
+
+            message.className =
+                "message error";
+
+            return;
+        }
+
+        if (password.length < 8) {
+
+            message.textContent =
+                currentLanguage === "en"
+                    ? "Password must be at least 8 characters."
+                    : "كلمة المرور يجب أن تكون 8 أحرف على الأقل.";
+
+            message.className =
+                "message error";
+
+            return;
+        }
+
+        try {
+
+            const response =
+                await fetch("/register-account", {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+
+                    body: JSON.stringify({
+                        username: username,
+                        password: password
+                    })
+                });
+
+            const data =
+                await response.json();
+
+            if (data.success) {
+
+                message.textContent =
+                    currentLanguage === "en"
+                        ? "Account created successfully. You can now login."
+                        : "تم إنشاء الحساب بنجاح. يمكنك تسجيل الدخول الآن.";
+
+                message.className =
+                    "message success";
+
+            } else {
+
+                message.textContent =
+                    data.message;
+
+                message.className =
+                    "message error";
+            }
+
+        } catch (error) {
+
+            /* =========================
+               DEMO ACCOUNT FALLBACK
+            ========================= */
+
+            const accounts =
+                getDemoAccounts();
+
+            const existingAccount =
+                accounts.find(
+                    account =>
+                        account.username.toLowerCase() ===
+                        username.toLowerCase()
+                );
+
+            if (existingAccount) {
+
+                message.textContent =
+                    currentLanguage === "en"
+                        ? "Username already exists."
+                        : "اسم المستخدم موجود بالفعل.";
+
+                message.className =
+                    "message error";
+
+                return;
+            }
+
+            accounts.push({
+                username: username,
+                password: password,
+                phone: "",
+                status: "Not Verified"
+            });
+
+            saveDemoAccounts(accounts);
+
+            message.textContent =
+                currentLanguage === "en"
+                    ? "Demo account created successfully. You can now login."
+                    : "تم إنشاء الحساب التجريبي بنجاح. يمكنك الآن تسجيل الدخول.";
+
+            message.className =
+                "message success";
+
+        }
+
+    }
+
+
+    /* =========================
+       LOGOUT
+    ========================= */
+
+    logoutBtn.addEventListener("click", () => {
+
+        localStorage.removeItem(
+            "cybershieldLoggedIn"
+        );
+
+        localStorage.removeItem(
+            "cybershieldUsername"
+        );
+
+        loginBtn.style.display = "block";
+
+        logoutBtn.style.display = "none";
+
+        document.getElementById("otpSection")
+            .classList.remove("active");
+
+        openAuth();
+
+    });
+
+
+    /* =========================
+       OTP
+    ========================= */
+
+    let registeredPhone = "";
+
+    async function sendOTP() {
+
+        let phone =
+            document.getElementById("phone")
+                .value.trim();
+
+        registeredPhone = phone;
+
+        const message =
+            document.getElementById("sendMessage");
+
+        if (!phone) {
+
+            message.textContent =
+                currentLanguage === "en"
+                    ? "Please enter your phone number."
+                    : "اكتب رقم الهاتف أولًا.";
+
+            message.className =
+                "message error";
+
+            return;
+        }
+
+        try {
+
+            const response =
+                await fetch("/send-code", {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+
+                    body: JSON.stringify({
+                        phone: phone
+                    })
+                });
+
+            const data =
+                await response.json();
+
+            message.textContent =
+                data.message;
+
+            message.className =
+                data.success
+                    ? "message success"
+                    : "message error";
+
+        } catch (error) {
+
+            /* =========================
+               DEMO OTP
+            ========================= */
+
+            message.textContent =
+                currentLanguage === "en"
+                    ? "Demo verification code sent. Use 123456."
+                    : "تم إرسال كود التحقق التجريبي. استخدم 123456.";
+
+            message.className =
+                "message success";
+
+        }
+
+    }
+
+
+    /* =========================
+       OTP VERIFY
+    ========================= */
+
+    async function verifyOTP() {
+
+        const code =
+            document.getElementById("otpCode")
+                .value.trim();
+
+        const message =
+            document.getElementById("verifyMessage");
+
+        if (!code) {
+
+            message.textContent =
+                currentLanguage === "en"
+                    ? "Enter the verification code."
+                    : "اكتب كود التحقق.";
+
+            message.className =
+                "message error";
+
+            return;
+        }
+
+        try {
+
+            const response =
+                await fetch("/verify-code", {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+
+                    body: JSON.stringify({
+                        code: code
+                    })
+                });
+
+            const data =
+                await response.json();
+
+            if (data.success) {
+
+                const registerResponse =
+                    await fetch("/register-user", {
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+
+                        body: JSON.stringify({
+                            phone: registeredPhone
+                        })
+                    });
+
+                const registerData =
+                    await registerResponse.json();
+
+                if (!registerData.success) {
+
+                    message.textContent =
+                        registerData.message;
+
+                    message.className =
+                        "message error";
+
+                    return;
+                }
+
+                message.textContent =
+                    currentLanguage === "en"
+                        ? "Phone verification successful!"
+                        : "تم التحقق من الهاتف بنجاح!";
+
+                message.className =
+                    "message success";
+
+            } else {
+
+                message.textContent =
+                    currentLanguage === "en"
+                        ? "Invalid verification code."
+                        : "كود التحقق غير صحيح.";
+
+                message.className =
+                    "message error";
+
+            }
+
+        } catch (error) {
+
+            /* =========================
+               DEMO OTP VERIFY
+            ========================= */
+
+            if (code === "123456") {
+
+                message.textContent =
+                    currentLanguage === "en"
+                        ? "Demo phone verification successful!"
+                        : "تم التحقق من الهاتف بنجاح في الوضع التجريبي!";
+
+                message.className =
+                    "message success";
+
+                localStorage.setItem(
+                    "cybershieldPhoneVerified",
+                    "true"
+                );
+
+            } else {
+
+                message.textContent =
+                    currentLanguage === "en"
+                        ? "Invalid verification code. Use 123456 for Demo."
+                        : "كود التحقق غير صحيح. استخدم 123456 في الوضع التجريبي.";
+
+                message.className =
+                    "message error";
+
+            }
+
+        }
+
+    }
+
+
+    /* =========================
+       QUIZ
+    ========================= */
+
+    function checkAnswer(button, correct) {
+
+        const result =
+            document.getElementById("quiz-result");
+
+        if (correct) {
+
+            result.textContent =
+                currentLanguage === "en"
+                    ? "Correct! Confidentiality protects information from unauthorized access."
+                    : "إجابة صحيحة! السرية تحمي المعلومات من الوصول غير المصرح به.";
+
+            result.className =
+                "success";
+
+        } else {
+
+            result.textContent =
+                currentLanguage === "en"
+                    ? "Not quite. Try again."
+                    : "ليست الإجابة الصحيحة. حاول مرة أخرى.";
+
+            result.className =
+                "error";
+
+        }
+
+    }
+
+
+    /* =========================
+       BACKGROUND MUSIC
+    ========================= */
+
+    let audioContext = null;
+    let musicTimer = null;
+    let musicPlaying = false;
+    let musicStep = 0;
+
+    function createMusicButton() {
+
+        const button =
+            document.createElement("button");
+
+        button.id = "musicToggle";
+
+        button.textContent =
+            "🎵 Music: Off";
+
+        button.style.position = "fixed";
+        button.style.bottom = "20px";
+        button.style.right = "20px";
+        button.style.zIndex = "3000";
+        button.style.padding = "10px 15px";
+        button.style.border =
+            "1px solid rgba(0,217,255,.3)";
+        button.style.borderRadius = "10px";
+        button.style.background = "#0d1424";
+        button.style.color = "#f4f8ff";
+        button.style.cursor = "pointer";
+
+        button.addEventListener(
+            "click",
+            toggleMusic
+        );
+
+        document.body.appendChild(button);
+    }
+
+
+    function playCinematicNote(
+        frequency,
+        duration = 4,
+        volume = 0.025
+    ) {
+
+        if (!audioContext) {
+
+            audioContext =
+                new (
+                    window.AudioContext ||
+                    window.webkitAudioContext
+                )();
+
+        }
+
+        const oscillator =
+            audioContext.createOscillator();
+
+        const gain =
+            audioContext.createGain();
+
+        oscillator.type = "triangle";
+
+        oscillator.frequency.setValueAtTime(
+            frequency,
+            audioContext.currentTime
+        );
+
+        gain.gain.setValueAtTime(
+            0.0001,
+            audioContext.currentTime
+        );
+
+        gain.gain.exponentialRampToValueAtTime(
+            volume,
+            audioContext.currentTime + 0.8
+        );
+
+        gain.gain.exponentialRampToValueAtTime(
+            0.0001,
+            audioContext.currentTime + duration
+        );
+
+        oscillator.connect(gain);
+        gain.connect(audioContext.destination);
+
+        oscillator.start();
+
+        oscillator.stop(
+            audioContext.currentTime + duration
+        );
+    }
+
+
+    function playBassNote(frequency) {
+
+        if (!audioContext) {
+            return;
+        }
+
+        const oscillator =
+            audioContext.createOscillator();
+
+        const gain =
+            audioContext.createGain();
+
+        oscillator.type = "sine";
+
+        oscillator.frequency.value =
+            frequency;
+
+        gain.gain.setValueAtTime(
+            0.0001,
+            audioContext.currentTime
+        );
+
+        gain.gain.exponentialRampToValueAtTime(
+            0.018,
+            audioContext.currentTime + 0.5
+        );
+
+        gain.gain.exponentialRampToValueAtTime(
+            0.0001,
+            audioContext.currentTime + 4
+        );
+
+        oscillator.connect(gain);
+        gain.connect(audioContext.destination);
+
+        oscillator.start();
+
+        oscillator.stop(
+            audioContext.currentTime + 4
+        );
+    }
+
+
+    function startMusic() {
+
+        if (musicPlaying) {
+            return;
+        }
+
+        if (!audioContext) {
+
+            audioContext =
+                new (
+                    window.AudioContext ||
+                    window.webkitAudioContext
+                )();
+
+        }
+
+        if (audioContext.state === "suspended") {
+            audioContext.resume();
+        }
+
+        musicPlaying = true;
+        musicStep = 0;
+
+        const melody = [
+            196.00,
+            233.08,
+            261.63,
+            233.08,
+            174.61,
+            207.65,
+            246.94,
+            207.65,
+            196.00,
+            220.00,
+            261.63,
+            220.00
+        ];
+
+        const bass = [
+            98.00,
+            87.31,
+            103.83,
+            98.00
+        ];
+
+        function playSequence() {
+
+            if (!musicPlaying) {
+                return;
+            }
+
+            const note =
+                melody[
+                    musicStep % melody.length
+                ];
+
+            const bassNote =
+                bass[
+                    Math.floor(
+                        musicStep / 3
+                    ) % bass.length
+                ];
+
+            playCinematicNote(
+                note,
+                4,
+                0.028
+            );
+
+            if (musicStep % 3 === 0) {
+
+                playBassNote(
+                    bassNote
+                );
+
+            }
+
+            musicStep++;
+        }
+
+        playSequence();
+
+        musicTimer =
+            setInterval(
+                playSequence,
+                2200
+            );
+
+        document.getElementById(
+            "musicToggle"
+        ).textContent =
+            "🎵 Music: On";
+    }
+
+
+    function stopMusic() {
+
+        musicPlaying = false;
+
+        if (musicTimer) {
+
+            clearInterval(
+                musicTimer
+            );
+
+            musicTimer = null;
+        }
+
+        document.getElementById(
+            "musicToggle"
+        ).textContent =
+            "🎵 Music: Off";
+    }
+
+
+    function toggleMusic() {
+
+        if (musicPlaying) {
+            stopMusic();
+        } else {
+            startMusic();
+        }
+
+    }
+
+
+    createMusicButton();
+
+
+    /* =========================
+       RESTORE LOGIN STATE
+    ========================= */
+
+    if (
+        localStorage.getItem(
+            "cybershieldLoggedIn"
+        ) === "true"
+    ) {
+
+        loginBtn.style.display = "none";
+
+        logoutBtn.style.display = "block";
+
+        document.getElementById("otpSection")
+            .classList.add("active");
+
+    }
+
+</script>
+
+
+</body>
+</html>

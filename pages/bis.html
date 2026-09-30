@@ -1,0 +1,1471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CyberShield | BIS</title>
+
+    <style>
+        :root {
+            --bg: #0d0b18;
+            --surface: #17132a;
+            --surface2: #211b38;
+            --primary: #b77cff;
+            --secondary: #6c63ff;
+            --accent: #e0c4ff;
+            --text: #f6f1ff;
+            --muted: #b9aecb;
+            --border: #3b3159;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(13, 11, 24, 0.97);
+            border-bottom: 1px solid var(--border);
+            padding: 18px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: var(--primary);
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        nav a {
+            color: var(--text);
+            text-decoration: none;
+            margin-left: 18px;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        .hero {
+            padding: 90px 7%;
+            text-align: center;
+            background:
+                radial-gradient(circle at top, #30205a 0%, transparent 55%),
+                var(--bg);
+        }
+
+        .badge {
+            display: inline-block;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            padding: 7px 15px;
+            border-radius: 30px;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: clamp(42px, 7vw, 72px);
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            max-width: 850px;
+            margin: auto;
+            color: var(--muted);
+            font-size: 18px;
+        }
+
+        .container {
+            width: 86%;
+            max-width: 1250px;
+            margin: auto;
+        }
+
+        section {
+            padding: 70px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-title h2 {
+            color: var(--primary);
+            font-size: 34px;
+            margin-bottom: 8px;
+        }
+
+        .section-title p {
+            color: var(--muted);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 25px;
+            transition: 0.25s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+        }
+
+        .card h3 {
+            color: var(--primary);
+            margin-bottom: 12px;
+        }
+
+        .card p {
+            color: var(--muted);
+        }
+
+        .subject-number {
+            color: var(--secondary);
+            font-weight: bold;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        details {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 13px;
+            margin-bottom: 15px;
+            padding: 19px 22px;
+        }
+
+        summary {
+            cursor: pointer;
+            color: var(--primary);
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        details p,
+        details ul {
+            margin-top: 15px;
+            color: var(--muted);
+        }
+
+        details ul {
+            padding-left: 23px;
+        }
+
+        .resource-card {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .button {
+            display: inline-block;
+            text-align: center;
+            background: var(--primary);
+            color: #120b1d;
+            padding: 11px 17px;
+            border-radius: 9px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        .button:hover {
+            background: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .button.secondary {
+            background: transparent;
+            color: var(--primary);
+            border: 1px solid var(--primary);
+        }
+
+        .button.secondary:hover {
+            background: var(--primary);
+            color: #120b1d;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 18px;
+        }
+
+        .roadmap {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 18px;
+        }
+
+        .step {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--primary);
+            border-radius: 12px;
+            padding: 23px;
+        }
+
+        .step span {
+            color: var(--secondary);
+            font-weight: bold;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 18px;
+            margin-top: 35px;
+        }
+
+        .stat {
+            background: var(--surface2);
+            border: 1px solid var(--border);
+            padding: 25px;
+            text-align: center;
+            border-radius: 14px;
+        }
+
+        .stat h3 {
+            color: var(--primary);
+            font-size: 30px;
+        }
+
+        .stat p {
+            color: var(--muted);
+        }
+
+        .back {
+            text-align: center;
+            padding: 30px 0 70px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            background: #080611;
+            border-top: 1px solid var(--border);
+            color: var(--muted);
+        }
+
+        @media (max-width: 700px) {
+
+            header {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            nav {
+                text-align: center;
+            }
+
+            nav a {
+                margin: 0 6px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+
+    <div class="logo">
+        💼 CyberShield BIS
+    </div>
+
+    <nav>
+        <a href="../index.html">Home</a>
+        <a href="../index.html#learning-center">Learning Center</a>
+    </nav>
+
+</header>
+
+
+<!-- HERO -->
+
+<section class="hero">
+
+    <div class="badge">
+        Business Information Systems
+    </div>
+
+    <h1>BIS</h1>
+
+    <p>
+        Learn business, accounting, economics, mathematics,
+        information systems, programming, databases, analytics
+        and other essential subjects for Business Information Systems students.
+    </p>
+
+    <div class="stats">
+
+        <div class="stat">
+            <h3>15+</h3>
+            <p>Core Subjects</p>
+        </div>
+
+        <div class="stat">
+            <h3>50+</h3>
+            <p>Learning Topics</p>
+        </div>
+
+        <div class="stat">
+            <h3>100%</h3>
+            <p>Student Focused</p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<div class="container">
+
+
+<!-- SUBJECTS -->
+
+<section>
+
+    <div class="section-title">
+        <h2>📚 BIS Subjects</h2>
+        <p>Explore the main subjects and their important topics.</p>
+    </div>
+
+
+    <div class="grid">
+
+
+        <!-- MICROECONOMICS -->
+
+        <div class="card">
+
+            <div class="subject-number">01</div>
+
+            <h3>📈 Microeconomics</h3>
+
+            <p>
+                Study how individuals, consumers and businesses
+                make economic decisions.
+            </p>
+
+            <div class="buttons">
+
+                <a class="button"
+                   href="https://www.khanacademy.org/economics-finance-domain/microeconomics"
+                   target="_blank">
+                    🎥 Learn
+                </a>
+
+                <a class="button secondary"
+                   href="https://openstax.org/books/principles-microeconomics-3e/pages/1-introduction"
+                   target="_blank">
+                    📖 Book
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- ENTREPRENEURSHIP -->
+
+        <div class="card">
+
+            <div class="subject-number">02</div>
+
+            <h3>🚀 Entrepreneurship</h3>
+
+            <p>
+                Learn how business ideas become projects,
+                products and sustainable businesses.
+            </p>
+
+            <div class="buttons">
+
+                <a class="button"
+                   href="https://www.sba.gov/business-guide"
+                   target="_blank">
+                    🌐 Resources
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- BUSINESS MATH -->
+
+        <div class="card">
+
+            <div class="subject-number">03</div>
+
+            <h3>🧮 Business Mathematics</h3>
+
+            <p>
+                Percentages, equations, interest, functions,
+                financial calculations and break-even analysis.
+            </p>
+
+            <div class="buttons">
+
+                <a class="button"
+                   href="https://www.khanacademy.org/math"
+                   target="_blank">
+                    🎥 Learn Math
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- COST ACCOUNTING -->
+
+        <div class="card">
+
+            <div class="subject-number">04</div>
+
+            <h3>🧾 Cost Accounting</h3>
+
+            <p>
+                Learn fixed costs, variable costs, cost behavior,
+                budgeting, contribution margin and break-even analysis.
+            </p>
+
+            <div class="buttons">
+
+                <a class="button"
+                   href="https://openstax.org/subjects/business"
+                   target="_blank">
+                    📖 OpenStax
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- MANAGEMENT -->
+
+        <div class="card">
+
+            <div class="subject-number">05</div>
+
+            <h3>🏢 Principles of Management</h3>
+
+            <p>
+                Planning, organizing, leading, controlling,
+                motivation and managerial decision-making.
+            </p>
+
+            <div class="buttons">
+
+                <a class="button"
+                   href="https://openstax.org/books/principles-management/pages/preface"
+                   target="_blank">
+                    📖 Open Book
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- FINANCIAL ACCOUNTING -->
+
+        <div class="card">
+
+            <div class="subject-number">06</div>
+
+            <h3>💰 Financial Accounting</h3>
+
+            <p>
+                Understand financial statements, assets,
+                liabilities, equity, revenue and expenses.
+            </p>
+
+            <div class="buttons">
+
+                <a class="button"
+                   href="https://openstax.org/subjects/business"
+                   target="_blank">
+                    📖 Resources
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- BUSINESS STATISTICS -->
+
+        <div class="card">
+
+            <div class="subject-number">07</div>
+
+            <h3>📊 Business Statistics</h3>
+
+            <p>
+                Descriptive statistics, probability, distributions,
+                sampling, correlation and regression.
+            </p>
+
+            <div class="buttons">
+
+                <a class="button"
+                   href="https://www.khanacademy.org/math/statistics-probability"
+                   target="_blank">
+                    🎥 Learn
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- MARKETING -->
+
+        <div class="card">
+
+            <div class="subject-number">08</div>
+
+            <h3>📣 Principles of Marketing</h3>
+
+            <p>
+                Customers, market research, segmentation,
+                positioning, branding and marketing strategy.
+            </p>
+
+        </div>
+
+
+        <!-- FINANCE -->
+
+        <div class="card">
+
+            <div class="subject-number">09</div>
+
+            <h3>💵 Principles of Finance</h3>
+
+            <p>
+                Time value of money, financial decisions,
+                risk, return and basic financial analysis.
+            </p>
+
+            <div class="buttons">
+
+                <a class="button"
+                   href="https://www.khanacademy.org/economics-finance-domain/core-finance"
+                   target="_blank">
+                    🎥 Learn
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- HR -->
+
+        <div class="card">
+
+            <div class="subject-number">10</div>
+
+            <h3>👥 Human Resource Management</h3>
+
+            <p>
+                Recruitment, selection, training, performance
+                management and employee development.
+            </p>
+
+        </div>
+
+
+        <!-- ORGANIZATIONAL BEHAVIOR -->
+
+        <div class="card">
+
+            <div class="subject-number">11</div>
+
+            <h3>🧠 Organizational Behavior</h3>
+
+            <p>
+                Motivation, teamwork, leadership, communication
+                and behavior inside organizations.
+            </p>
+
+        </div>
+
+
+        <!-- MIS -->
+
+        <div class="card">
+
+            <div class="subject-number">12</div>
+
+            <h3>💻 Management Information Systems</h3>
+
+            <p>
+                Learn how organizations use information,
+                technology and systems to support decisions.
+            </p>
+
+        </div>
+
+
+        <!-- DATABASES -->
+
+        <div class="card">
+
+            <div class="subject-number">13</div>
+
+            <h3>🗄️ Databases</h3>
+
+            <p>
+                Tables, relationships, SQL, normalization,
+                queries and database design.
+            </p>
+
+            <div class="buttons">
+
+                <a class="button"
+                   href="https://www.w3schools.com/sql/"
+                   target="_blank">
+                    🌐 SQL
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- PROGRAMMING -->
+
+        <div class="card">
+
+            <div class="subject-number">14</div>
+
+            <h3>👨‍💻 Programming</h3>
+
+            <p>
+                Programming logic, variables, conditions,
+                loops, functions, data structures and algorithms.
+            </p>
+
+            <div class="buttons">
+
+                <a class="button"
+                   href="https://www.freecodecamp.org/learn/"
+                   target="_blank">
+                    🎥 Learn Coding
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- SYSTEM ANALYSIS -->
+
+        <div class="card">
+
+            <div class="subject-number">15</div>
+
+            <h3>⚙️ Systems Analysis & Design</h3>
+
+            <p>
+                Requirements, system modeling, UML,
+                development methodologies and system design.
+            </p>
+
+        </div>
+
+
+        <!-- DATA ANALYTICS -->
+
+        <div class="card">
+
+            <div class="subject-number">16</div>
+
+            <h3>📊 Business Intelligence & Data Analytics</h3>
+
+            <p>
+                Learn how data can be transformed into useful
+                information for business decisions.
+            </p>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<!-- MICROECONOMICS NOTES -->
+
+<section id="microeconomics-notes">
+
+    <div class="section-title">
+
+        <h2>📈 Microeconomics Notes</h2>
+
+        <p>
+            Click any topic to open your notes.
+        </p>
+
+    </div>
+
+
+    <details>
+
+        <summary>
+            Scarcity & Opportunity Cost
+        </summary>
+
+        <p>
+            Resources are limited while human wants are unlimited.
+            Opportunity cost is the value of the next best alternative
+            given up when making a choice.
+        </p>
+
+    </details>
+
+
+    <details>
+
+        <summary>
+            Supply & Demand
+        </summary>
+
+        <p>
+            Demand describes the quantity consumers are willing and able
+            to buy at different prices. Supply describes the quantity
+            producers are willing and able to sell.
+        </p>
+
+    </details>
+
+
+    <details>
+
+        <summary>
+            Market Equilibrium
+        </summary>
+
+        <p>
+            Market equilibrium occurs where quantity demanded and quantity
+            supplied are equal.
+        </p>
+
+    </details>
+
+
+    <details>
+
+        <summary>
+            Elasticity
+        </summary>
+
+        <p>
+            Elasticity measures how responsive one variable is to a change
+            in another variable, such as how quantity demanded responds
+            to a change in price.
+        </p>
+
+    </details>
+
+
+    <details>
+
+        <summary>
+            Fixed & Variable Costs
+        </summary>
+
+        <p>
+            Fixed costs generally do not change with the level of output
+            over a relevant range, while variable costs change as output
+            changes.
+        </p>
+
+    </details>
+
+</section>
+
+
+<!-- ENTREPRENEURSHIP NOTES -->
+
+<section>
+
+    <div class="section-title">
+
+        <h2>🚀 Entrepreneurship Notes</h2>
+
+        <p>Important concepts for future entrepreneurs.</p>
+
+    </div>
+
+
+    <details>
+
+        <summary>
+            Business Idea
+        </summary>
+
+        <p>
+            A business idea identifies a problem, need or opportunity
+            and proposes a product or service that can address it.
+        </p>
+
+    </details>
+
+
+    <details>
+
+        <summary>
+            Business Model
+        </summary>
+
+        <p>
+            A business model explains how an organization creates,
+            delivers and captures value.
+        </p>
+
+    </details>
+
+
+    <details>
+
+        <summary>
+            Market Research
+        </summary>
+
+        <p>
+            Market research helps entrepreneurs understand customers,
+            competitors, demand and market conditions.
+        </p>
+
+    </details>
+
+
+    <details>
+
+        <summary>
+            MVP
+        </summary>
+
+        <p>
+            A minimum viable product is an early version of a product
+            designed to test important assumptions with users.
+        </p>
+
+    </details>
+
+</section>
+
+
+<!-- BUSINESS MATH -->
+
+<section>
+
+    <div class="section-title">
+
+        <h2>🧮 Business Mathematics Notes</h2>
+
+        <p>Important calculations used in business.</p>
+
+    </div>
+
+
+    <details>
+
+        <summary>
+            Percentages
+        </summary>
+
+        <p>
+            Percentages are commonly used to calculate changes,
+            discounts, margins, growth rates and financial ratios.
+        </p>
+
+    </details>
+
+
+    <details>
+
+        <summary>
+            Simple Interest
+        </summary>
+
+        <p>
+            Simple interest is calculated using principal, interest rate
+            and time.
+        </p>
+
+    </details>
+
+
+    <details>
+
+        <summary>
+            Break-even Point
+        </summary>
+
+        <p>
+            The break-even point is the level of sales at which total
+            revenue equals total costs.
+        </p>
+
+    </details>
+
+</section>
+
+
+<!-- ACCOUNTING NOTES -->
+
+<section>
+
+    <div class="section-title">
+
+        <h2>🧾 Accounting Notes</h2>
+
+        <p>Essential accounting concepts.</p>
+
+    </div>
+
+
+    <details>
+
+        <summary>
+            Assets
+        </summary>
+
+        <p>
+            Assets are economic resources controlled by a business,
+            such as cash, inventory and equipment.
+        </p>
+
+    </details>
+
+
+    <details>
+
+        <summary>
+            Liabilities
+        </summary>
+
+        <p>
+            Liabilities are obligations that a business owes to other
+            parties.
+        </p>
+
+    </details>
+
+
+    <details>
+
+        <summary>
+            Equity
+        </summary>
+
+        <p>
+            Equity represents the owner's residual interest after
+            liabilities are deducted from assets.
+        </p>
+
+    </details>
+
+</section>
+
+
+<!-- MANAGEMENT NOTES -->
+
+<section>
+
+    <div class="section-title">
+
+        <h2>🏢 Management Notes</h2>
+
+        <p>Understand how organizations are managed.</p>
+
+    </div>
+
+
+    <details>
+
+        <summary>
+            Planning
+        </summary>
+
+        <p>
+            Planning involves defining objectives and determining
+            actions and resources needed to achieve them.
+        </p>
+
+    </details>
+
+
+    <details>
+
+        <summary>
+            Organizing
+        </summary>
+
+        <p>
+            Organizing involves arranging people, responsibilities
+            and resources to achieve organizational goals.
+        </p>
+
+    </details>
+
+
+    <details>
+
+        <summary>
+            Leading
+        </summary>
+
+        <p>
+            Leading involves motivating and guiding people toward
+            organizational objectives.
+        </p>
+
+    </details>
+
+
+    <details>
+
+        <summary>
+            Controlling
+        </summary>
+
+        <p>
+            Controlling involves monitoring performance and taking
+            corrective action when necessary.
+        </p>
+
+    </details>
+
+</section>
+
+
+<!-- VIDEOS & RESOURCES -->
+
+<section>
+
+    <div class="section-title">
+
+        <h2>🎥 Video Learning & Resources</h2>
+
+        <p>
+            External resources you can open directly.
+        </p>
+
+    </div>
+
+
+    <div class="grid">
+
+
+        <div class="card resource-card">
+
+            <div>
+
+                <h3>📈 Khan Academy — Microeconomics</h3>
+
+                <p>
+                    Structured lessons covering scarcity, supply and demand,
+                    elasticity, consumer theory, production, competition
+                    and market failure.
+                </p>
+
+            </div>
+
+            <a class="button"
+               href="https://www.khanacademy.org/economics-finance-domain/microeconomics"
+               target="_blank">
+
+                Open Course
+
+            </a>
+
+        </div>
+
+
+        <div class="card resource-card">
+
+            <div>
+
+                <h3>📖 OpenStax — Economics</h3>
+
+                <p>
+                    Free college-level economics textbook with explanations,
+                    examples and practice-oriented material.
+                </p>
+
+            </div>
+
+            <a class="button"
+               href="https://openstax.org/details/books/principles-economics-3e/"
+               target="_blank">
+
+                Open Book
+
+            </a>
+
+        </div>
+
+
+        <div class="card resource-card">
+
+            <div>
+
+                <h3>🏢 OpenStax — Management</h3>
+
+                <p>
+                    Free textbook covering planning, organizing, leading,
+                    controlling, motivation and management concepts.
+                </p>
+
+            </div>
+
+            <a class="button"
+               href="https://openstax.org/books/principles-management/pages/preface"
+               target="_blank">
+
+                Open Book
+
+            </a>
+
+        </div>
+
+
+        <div class="card resource-card">
+
+            <div>
+
+                <h3>📊 Khan Academy — Statistics</h3>
+
+                <p>
+                    Lessons and practice covering statistics and probability.
+                </p>
+
+            </div>
+
+            <a class="button"
+               href="https://www.khanacademy.org/math/statistics-probability"
+               target="_blank">
+
+                Open Course
+
+            </a>
+
+        </div>
+
+
+        <div class="card resource-card">
+
+            <div>
+
+                <h3>💻 W3Schools — SQL</h3>
+
+                <p>
+                    Interactive SQL tutorials and examples for database
+                    fundamentals.
+                </p>
+
+            </div>
+
+            <a class="button"
+               href="https://www.w3schools.com/sql/"
+               target="_blank">
+
+                Learn SQL
+
+            </a>
+
+        </div>
+
+
+        <div class="card resource-card">
+
+            <div>
+
+                <h3>👨‍💻 freeCodeCamp</h3>
+
+                <p>
+                    Free programming and web-development learning resources.
+                </p>
+
+            </div>
+
+            <a class="button"
+               href="https://www.freecodecamp.org/learn/"
+               target="_blank">
+
+                Start Learning
+
+            </a>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<!-- STUDY MATERIALS -->
+
+<section>
+
+    <div class="section-title">
+
+        <h2>📄 Study Materials</h2>
+
+        <p>
+            Useful books and learning resources.
+        </p>
+
+    </div>
+
+
+    <div class="grid">
+
+
+        <div class="card resource-card">
+
+            <h3>📘 Economics Textbook</h3>
+
+            <p>
+                OpenStax Principles of Economics 3e.
+            </p>
+
+            <a class="button"
+               href="https://openstax.org/details/books/principles-economics-3e/"
+               target="_blank">
+
+                Open Material
+
+            </a>
+
+        </div>
+
+
+        <div class="card resource-card">
+
+            <h3>📗 Management Textbook</h3>
+
+            <p>
+                OpenStax Principles of Management.
+            </p>
+
+            <a class="button"
+               href="https://openstax.org/books/principles-management/pages/preface"
+               target="_blank">
+
+                Open Material
+
+            </a>
+
+        </div>
+
+
+        <div class="card resource-card">
+
+            <h3>📊 Statistics Practice</h3>
+
+            <p>
+                Khan Academy statistics and probability course.
+            </p>
+
+            <a class="button"
+               href="https://www.khanacademy.org/math/statistics-probability"
+               target="_blank">
+
+                Open Practice
+
+            </a>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<!-- BIS ROADMAP -->
+
+<section>
+
+    <div class="section-title">
+
+        <h2>🧭 BIS Learning Roadmap</h2>
+
+        <p>
+            A suggested path for building your BIS skills.
+        </p>
+
+    </div>
+
+
+    <div class="roadmap">
+
+
+        <div class="step">
+
+            <span>STEP 01</span>
+
+            <h3>Business Fundamentals</h3>
+
+            <p>
+                Economics, accounting, management and business mathematics.
+            </p>
+
+        </div>
+
+
+        <div class="step">
+
+            <span>STEP 02</span>
+
+            <h3>Information Systems</h3>
+
+            <p>
+                Understand how organizations use information systems.
+            </p>
+
+        </div>
+
+
+        <div class="step">
+
+            <span>STEP 03</span>
+
+            <h3>Programming</h3>
+
+            <p>
+                Learn programming logic and build software fundamentals.
+            </p>
+
+        </div>
+
+
+        <div class="step">
+
+            <span>STEP 04</span>
+
+            <h3>Databases</h3>
+
+            <p>
+                Learn relational databases, SQL and database design.
+            </p>
+
+        </div>
+
+
+        <div class="step">
+
+            <span>STEP 05</span>
+
+            <h3>Systems Analysis</h3>
+
+            <p>
+                Learn requirements, modeling and system development.
+            </p>
+
+        </div>
+
+
+        <div class="step">
+
+            <span>STEP 06</span>
+
+            <h3>Data & BI</h3>
+
+            <p>
+                Move toward analytics, dashboards and business intelligence.
+            </p>
+
+        </div>
+
+
+        <div class="step">
+
+            <span>STEP 07</span>
+
+            <h3>Projects</h3>
+
+            <p>
+                Build practical projects combining business and technology.
+            </p>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<!-- BACK -->
+
+<div class="back">
+
+    <a class="button"
+       href="../index.html#learning-center">
+
+        ← Back to Learning Center
+
+    </a>
+
+</div>
+
+
+</div>
+
+
+<footer>
+
+    <p>
+        © 2026 CyberShield — BIS Learning Center
+    </p>
+
+</footer>
+
+
+</body>
+</html>

@@ -1,0 +1,1647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Networking | CyberShield</title>
+
+    <style>
+        :root {
+            --bg: #070b1f;
+            --surface: #0d1430;
+            --surface2: #151d45;
+            --primary: #00d9ff;
+            --secondary: #7c5cff;
+            --accent: #9eeaff;
+            --text: #f4f8ff;
+            --muted: #aab6d3;
+            --border: rgba(0, 217, 255, 0.22);
+            --shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(7, 11, 31, 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: auto;
+            padding: 18px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .logo span {
+            color: white;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: var(--muted);
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .hero {
+            min-height: 75vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 80px 20px;
+
+            background:
+                radial-gradient(
+                    circle at top right,
+                    rgba(0, 217, 255, 0.18),
+                    transparent 35%
+                ),
+                radial-gradient(
+                    circle at bottom left,
+                    rgba(124, 92, 255, 0.18),
+                    transparent 35%
+                );
+        }
+
+        .hero-content {
+            max-width: 850px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            margin-bottom: 20px;
+        }
+
+        .hero h1 span {
+            color: var(--primary);
+        }
+
+        .hero p {
+            color: var(--muted);
+            font-size: 1.15rem;
+            max-width: 720px;
+            margin: auto;
+        }
+
+        .hero-buttons {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 13px 22px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            transition: 0.3s;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: #070b1f;
+            font-weight: bold;
+        }
+
+        .btn-secondary {
+            background: var(--surface);
+            color: white;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+        }
+
+        section {
+            max-width: 1200px;
+            margin: auto;
+            padding: 75px 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 45px;
+        }
+
+        .section-title h2 {
+            font-size: 2.3rem;
+            margin-bottom: 10px;
+        }
+
+        .section-title p {
+            color: var(--muted);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(
+                auto-fit,
+                minmax(240px, 1fr)
+            );
+            gap: 22px;
+        }
+
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: var(--shadow);
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+        }
+
+        .card h3 {
+            color: var(--primary);
+            margin-bottom: 12px;
+        }
+
+        .card p {
+            color: var(--muted);
+        }
+
+        .tag {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 6px 10px;
+            border-radius: 20px;
+            background: rgba(0, 217, 255, 0.1);
+            color: var(--accent);
+            font-size: 0.85rem;
+        }
+
+        .notes {
+            max-width: 900px;
+            margin: auto;
+        }
+
+        details {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            margin-bottom: 15px;
+            overflow: hidden;
+        }
+
+        summary {
+            cursor: pointer;
+            padding: 18px 20px;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        details div {
+            padding: 0 20px 20px;
+            color: var(--muted);
+        }
+
+        code {
+            background: #050817;
+            color: var(--accent);
+            padding: 3px 7px;
+            border-radius: 5px;
+        }
+
+        pre {
+            background: #050817;
+            padding: 18px;
+            border-radius: 10px;
+            overflow-x: auto;
+            margin-top: 15px;
+            color: #d9f8ff;
+        }
+
+        .roadmap-item {
+            background: var(--surface);
+            border-left: 4px solid var(--primary);
+            padding: 22px;
+            margin-bottom: 18px;
+            border-radius: 0 12px 12px 0;
+        }
+
+        .roadmap-item h3 {
+            color: var(--primary);
+            margin-bottom: 7px;
+        }
+
+        .resource-card {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .resource-card a {
+            margin-top: 18px;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        .harvard {
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(0, 217, 255, 0.1),
+                    rgba(124, 92, 255, 0.1)
+                );
+            border-color: rgba(124, 92, 255, 0.3);
+        }
+
+        .project-number {
+            font-size: 2rem;
+            color: var(--secondary);
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .check-list {
+            list-style: none;
+        }
+
+        .check-list li {
+            margin: 12px 0;
+            color: var(--muted);
+        }
+
+        .check-list li::before {
+            content: "✓";
+            color: var(--primary);
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .protocol {
+            text-align: center;
+            font-size: 1.4rem;
+            color: var(--accent);
+            margin: 20px 0;
+            font-weight: bold;
+        }
+
+        footer {
+            text-align: center;
+            padding: 35px 20px;
+            border-top: 1px solid var(--border);
+            color: var(--muted);
+        }
+
+        .back {
+            text-align: center;
+            padding-bottom: 80px;
+        }
+
+        @media (max-width: 700px) {
+            nav {
+                flex-direction: column;
+            }
+
+            .nav-links {
+                justify-content: center;
+            }
+
+            .hero {
+                min-height: 65vh;
+            }
+
+            section {
+                padding: 55px 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+
+    <nav>
+
+        <div class="logo">
+            Cyber<span>Shield</span> / Networking
+        </div>
+
+        <div class="nav-links">
+            <a href="../index.html">Home</a>
+            <a href="../index.html#learning-center">
+                Learning Center
+            </a>
+            <a href="#topics">Topics</a>
+            <a href="#notes">Notes</a>
+            <a href="#courses">Courses</a>
+        </div>
+
+    </nav>
+
+</header>
+
+
+<!-- HERO -->
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <h1>
+            Learn <span>Networking</span>
+        </h1>
+
+        <p>
+            Understand how computers communicate, how networks
+            are designed, how the Internet works, and how networking
+            connects directly with cybersecurity and web development.
+        </p>
+
+        <div class="hero-buttons">
+
+            <a href="#roadmap" class="btn btn-primary">
+                Start Roadmap
+            </a>
+
+            <a href="#courses" class="btn btn-secondary">
+                Free Courses
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- FUNDAMENTALS -->
+
+<section id="topics">
+
+    <div class="section-title">
+
+        <h2>Networking Fundamentals</h2>
+
+        <p>
+            The essential concepts every networking student should know.
+        </p>
+
+    </div>
+
+
+    <div class="grid">
+
+        <div class="card">
+
+            <h3>Computer Networks</h3>
+
+            <p>
+                Learn how computers, phones, servers and other
+                devices communicate with each other.
+            </p>
+
+            <span class="tag">Basics</span>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>IP Addressing</h3>
+
+            <p>
+                Understand IPv4, IPv6, public and private addresses,
+                and how devices are identified on networks.
+            </p>
+
+            <span class="tag">IP</span>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>MAC Address</h3>
+
+            <p>
+                Learn how network interfaces use MAC addresses
+                for communication at the data-link layer.
+            </p>
+
+            <span class="tag">Layer 2</span>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>Routers</h3>
+
+            <p>
+                Learn how routers connect different networks
+                and forward packets toward their destinations.
+            </p>
+
+            <span class="tag">Routing</span>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>Switches</h3>
+
+            <p>
+                Understand how switches connect devices
+                inside local area networks.
+            </p>
+
+            <span class="tag">LAN</span>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>DNS</h3>
+
+            <p>
+                Learn how domain names are translated into
+                IP addresses.
+            </p>
+
+            <span class="tag">Internet</span>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>DHCP</h3>
+
+            <p>
+                Understand how devices can automatically receive
+                network configuration information.
+            </p>
+
+            <span class="tag">Configuration</span>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>TCP & UDP</h3>
+
+            <p>
+                Understand the differences between TCP and UDP
+                and when each transport protocol is used.
+            </p>
+
+            <span class="tag">Transport</span>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- OSI / TCP IP -->
+
+<section>
+
+    <div class="section-title">
+
+        <h2>Networking Models</h2>
+
+        <p>
+            Understand how network communication is organized.
+        </p>
+
+    </div>
+
+
+    <div class="grid">
+
+        <div class="card">
+
+            <h3>OSI Model</h3>
+
+            <ul class="check-list">
+
+                <li>Physical</li>
+                <li>Data Link</li>
+                <li>Network</li>
+                <li>Transport</li>
+                <li>Session</li>
+                <li>Presentation</li>
+                <li>Application</li>
+
+            </ul>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>TCP/IP Model</h3>
+
+            <ul class="check-list">
+
+                <li>Network Access</li>
+                <li>Internet</li>
+                <li>Transport</li>
+                <li>Application</li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+
+    <div class="protocol">
+        Application → Transport → Internet → Network Access
+    </div>
+
+</section>
+
+
+<!-- NOTES -->
+
+<section id="notes">
+
+    <div class="section-title">
+
+        <h2>Networking Notes</h2>
+
+        <p>
+            Open any topic to study the notes.
+        </p>
+
+    </div>
+
+
+    <div class="notes">
+
+
+        <details>
+
+            <summary>What is a Computer Network?</summary>
+
+            <div>
+
+                <p>
+                    A computer network is a group of connected devices
+                    that can communicate and exchange information.
+                </p>
+
+                <p>
+                    Networks can range from small home networks
+                    to massive global networks such as the Internet.
+                </p>
+
+            </div>
+
+        </details>
+
+
+        <details>
+
+            <summary>What is an IP Address?</summary>
+
+            <div>
+
+                <p>
+                    An IP address identifies a device or network
+                    interface within an IP network.
+                </p>
+
+<pre>
+IPv4 example:
+
+192.168.1.10
+</pre>
+
+                <p>
+                    Private IPv4 addresses are commonly used inside
+                    local networks.
+                </p>
+
+            </div>
+
+        </details>
+
+
+        <details>
+
+            <summary>IPv4 vs IPv6</summary>
+
+            <div>
+
+                <p>
+                    IPv4 uses 32-bit addresses, while IPv6 uses
+                    128-bit addresses.
+                </p>
+
+<pre>
+IPv4:
+192.168.1.10
+
+IPv6:
+2001:db8::1
+</pre>
+
+            </div>
+
+        </details>
+
+
+        <details>
+
+            <summary>MAC Address</summary>
+
+            <div>
+
+                <p>
+                    A MAC address is associated with a network interface
+                    and is used for communication at the data-link layer.
+                </p>
+
+                <p>
+                    It is commonly represented as a sequence of
+                    hexadecimal values.
+                </p>
+
+<pre>
+Example:
+
+00:1A:2B:3C:4D:5E
+</pre>
+
+            </div>
+
+        </details>
+
+
+        <details>
+
+            <summary>Router vs Switch</summary>
+
+            <div>
+
+                <p>
+                    A switch commonly connects devices within a local
+                    network, while a router connects different networks.
+                </p>
+
+                <p>
+                    Both are important components in modern networks,
+                    but they perform different roles.
+                </p>
+
+            </div>
+
+        </details>
+
+
+        <details>
+
+            <summary>DNS</summary>
+
+            <div>
+
+                <p>
+                    DNS stands for Domain Name System.
+                </p>
+
+                <p>
+                    It helps translate human-readable domain names
+                    into IP addresses used by networked systems.
+                </p>
+
+<pre>
+example.com
+        ↓
+     DNS
+        ↓
+IP address
+</pre>
+
+            </div>
+
+        </details>
+
+
+        <details>
+
+            <summary>DHCP</summary>
+
+            <div>
+
+                <p>
+                    DHCP allows devices to obtain network configuration
+                    automatically.
+                </p>
+
+                <p>
+                    This can include an IP address, subnet information,
+                    default gateway and DNS server information.
+                </p>
+
+            </div>
+
+        </details>
+
+
+        <details>
+
+            <summary>TCP vs UDP</summary>
+
+            <div>
+
+                <p>
+                    TCP provides connection-oriented communication
+                    with mechanisms for reliable delivery.
+                </p>
+
+                <p>
+                    UDP is connectionless and has lower protocol
+                    overhead, making it useful for applications
+                    where low latency is important.
+                </p>
+
+            </div>
+
+        </details>
+
+
+        <details>
+
+            <summary>Ports</summary>
+
+            <div>
+
+                <p>
+                    Ports help identify network services associated
+                    with applications on a host.
+                </p>
+
+<pre>
+Examples:
+
+HTTP  → 80
+HTTPS → 443
+DNS   → 53
+SSH   → 22
+</pre>
+
+            </div>
+
+        </details>
+
+
+        <details>
+
+            <summary>Subnetting</summary>
+
+            <div>
+
+                <p>
+                    Subnetting divides an IP network into smaller
+                    logical networks.
+                </p>
+
+                <p>
+                    It can help organize networks and manage
+                    address allocation.
+                </p>
+
+            </div>
+
+        </details>
+
+    </div>
+
+</section>
+
+
+<!-- PROTOCOLS -->
+
+<section>
+
+    <div class="section-title">
+
+        <h2>Important Network Protocols</h2>
+
+        <p>
+            Protocols define how network communication works.
+        </p>
+
+    </div>
+
+
+    <div class="grid">
+
+        <div class="card">
+            <h3>HTTP / HTTPS</h3>
+            <p>
+                Used for communication between web clients
+                and web servers.
+            </p>
+        </div>
+
+
+        <div class="card">
+            <h3>DNS</h3>
+            <p>
+                Resolves domain names to IP addresses.
+            </p>
+        </div>
+
+
+        <div class="card">
+            <h3>DHCP</h3>
+            <p>
+                Provides network configuration to clients.
+            </p>
+        </div>
+
+
+        <div class="card">
+            <h3>SSH</h3>
+            <p>
+                Provides secure remote access to systems.
+            </p>
+        </div>
+
+
+        <div class="card">
+            <h3>FTP</h3>
+            <p>
+                A protocol designed for transferring files.
+            </p>
+        </div>
+
+
+        <div class="card">
+            <h3>SMTP</h3>
+            <p>
+                Used for sending email between mail systems.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ROADMAP -->
+
+<section id="roadmap">
+
+    <div class="section-title">
+
+        <h2>Networking Roadmap</h2>
+
+        <p>
+            Follow these stages from beginner to advanced networking.
+        </p>
+
+    </div>
+
+
+    <div class="roadmap">
+
+
+        <div class="roadmap-item">
+
+            <h3>01 — Networking Basics</h3>
+
+            <p>
+                Learn LAN, WAN, network devices and basic terminology.
+            </p>
+
+        </div>
+
+
+        <div class="roadmap-item">
+
+            <h3>02 — OSI & TCP/IP</h3>
+
+            <p>
+                Understand networking layers and how protocols
+                operate across them.
+            </p>
+
+        </div>
+
+
+        <div class="roadmap-item">
+
+            <h3>03 — IP Addressing</h3>
+
+            <p>
+                Learn IPv4, IPv6, subnetting and private networks.
+            </p>
+
+        </div>
+
+
+        <div class="roadmap-item">
+
+            <h3>04 — Switching & Routing</h3>
+
+            <p>
+                Learn how switches and routers move traffic
+                across networks.
+            </p>
+
+        </div>
+
+
+        <div class="roadmap-item">
+
+            <h3>05 — Network Services</h3>
+
+            <p>
+                Study DNS, DHCP, HTTP, HTTPS and other
+                important network services.
+            </p>
+
+        </div>
+
+
+        <div class="roadmap-item">
+
+            <h3>06 — Network Security</h3>
+
+            <p>
+                Learn foundational concepts such as firewalls,
+                secure protocols and network monitoring.
+            </p>
+
+        </div>
+
+
+        <div class="roadmap-item">
+
+            <h3>07 — Network Troubleshooting</h3>
+
+            <p>
+                Learn how to analyze connectivity problems
+                and understand network behavior.
+            </p>
+
+        </div>
+
+
+        <div class="roadmap-item">
+
+            <h3>08 — Real Projects</h3>
+
+            <p>
+                Design and document networks and practice
+                analyzing realistic scenarios.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- HARVARD COURSES -->
+
+<section id="courses">
+
+    <div class="section-title">
+
+        <h2>Harvard Free Courses</h2>
+
+        <p>
+            Build your networking foundation through Harvard's
+            computer science courses.
+        </p>
+
+    </div>
+
+
+    <div class="grid">
+
+
+        <div class="card harvard resource-card">
+
+            <div>
+
+                <h3>CS50x</h3>
+
+                <p>
+                    Harvard's introduction to computer science.
+                    It provides a strong foundation in computational
+                    thinking, algorithms and programming.
+                </p>
+
+            </div>
+
+            <a
+                href="https://cs50.harvard.edu/x/"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Open Harvard CS50x →
+            </a>
+
+        </div>
+
+
+        <div class="card harvard resource-card">
+
+            <div>
+
+                <h3>CS50 Cybersecurity</h3>
+
+                <p>
+                    Learn how to secure your own accounts,
+                    data, systems and software while understanding
+                    important cybersecurity concepts.
+                </p>
+
+            </div>
+
+            <a
+                href="https://cs50.harvard.edu/cybersecurity/"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Open Harvard CS50 Cybersecurity →
+            </a>
+
+        </div>
+
+
+        <div class="card harvard resource-card">
+
+            <div>
+
+                <h3>CS50 Web</h3>
+
+                <p>
+                    Learn web programming and understand how
+                    modern web applications communicate with
+                    servers and databases.
+                </p>
+
+            </div>
+
+            <a
+                href="https://cs50.harvard.edu/web/"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Open Harvard CS50 Web →
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- VIDEOS / RESOURCES -->
+
+<section>
+
+    <div class="section-title">
+
+        <h2>Videos & Learning Resources</h2>
+
+        <p>
+            Free resources to strengthen your networking skills.
+        </p>
+
+    </div>
+
+
+    <div class="grid">
+
+
+        <div class="card resource-card">
+
+            <div>
+
+                <h3>Professor Messer</h3>
+
+                <p>
+                    Free IT and networking training, including
+                    Network+ related educational material.
+                </p>
+
+            </div>
+
+            <a
+                href="https://www.professormesser.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Open Professor Messer →
+            </a>
+
+        </div>
+
+
+        <div class="card resource-card">
+
+            <div>
+
+                <h3>Cisco Networking Academy</h3>
+
+                <p>
+                    Cisco's learning platform with networking
+                    and technology educational resources.
+                </p>
+
+            </div>
+
+            <a
+                href="https://www.netacad.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Open Cisco Networking Academy →
+            </a>
+
+        </div>
+
+
+        <div class="card resource-card">
+
+            <div>
+
+                <h3>Cloudflare Learning Center</h3>
+
+                <p>
+                    Beginner-friendly explanations of DNS,
+                    HTTP, networking and Internet technologies.
+                </p>
+
+            </div>
+
+            <a
+                href="https://www.cloudflare.com/learning/"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Open Cloudflare Learning →
+            </a>
+
+        </div>
+
+
+        <div class="card resource-card">
+
+            <div>
+
+                <h3>Wireshark</h3>
+
+                <p>
+                    Learn about network traffic analysis using
+                    the official Wireshark project and documentation.
+                </p>
+
+            </div>
+
+            <a
+                href="https://www.wireshark.org/"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Open Wireshark →
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- STUDY MATERIALS -->
+
+<section>
+
+    <div class="section-title">
+
+        <h2>Study Materials</h2>
+
+        <p>
+            Useful references for deeper networking study.
+        </p>
+
+    </div>
+
+
+    <div class="grid">
+
+
+        <div class="card resource-card">
+
+            <h3>MDN HTTP</h3>
+
+            <p>
+                Learn how HTTP works and how browsers
+                communicate with servers.
+            </p>
+
+            <a
+                href="https://developer.mozilla.org/en-US/docs/Web/HTTP"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Open HTTP Docs →
+            </a>
+
+        </div>
+
+
+        <div class="card resource-card">
+
+            <h3>Cloudflare DNS</h3>
+
+            <p>
+                Study DNS concepts and understand how
+                domain resolution works.
+            </p>
+
+            <a
+                href="https://www.cloudflare.com/learning/dns/"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Study DNS →
+            </a>
+
+        </div>
+
+
+        <div class="card resource-card">
+
+            <h3>Internet Engineering Task Force</h3>
+
+            <p>
+                Explore Internet standards and technical
+                networking specifications.
+            </p>
+
+            <a
+                href="https://www.ietf.org/"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Open IETF →
+            </a>
+
+        </div>
+
+
+        <div class="card resource-card">
+
+            <h3>Internet Assigned Numbers Authority</h3>
+
+            <p>
+                Explore official information about Internet
+                protocol parameters and registries.
+            </p>
+
+            <a
+                href="https://www.iana.org/"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Open IANA →
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- PROJECTS -->
+
+<section>
+
+    <div class="section-title">
+
+        <h2>Networking Projects</h2>
+
+        <p>
+            Practice your knowledge with educational projects.
+        </p>
+
+    </div>
+
+
+    <div class="grid">
+
+
+        <div class="card">
+
+            <div class="project-number">01</div>
+
+            <h3>Home Network Diagram</h3>
+
+            <p>
+                Design a diagram showing devices,
+                switches, routers and Internet connectivity.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="project-number">02</div>
+
+            <h3>IP Address Planner</h3>
+
+            <p>
+                Create a small project that organizes
+                IP addresses for different network segments.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="project-number">03</div>
+
+            <h3>Network Troubleshooting Guide</h3>
+
+            <p>
+                Create a checklist for diagnosing common
+                connectivity problems.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="project-number">04</div>
+
+            <h3>DNS Research Project</h3>
+
+            <p>
+                Explain the process that occurs when a user
+                enters a domain name into a browser.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="project-number">05</div>
+
+            <h3>Network Monitoring Dashboard</h3>
+
+            <p>
+                Build an educational dashboard that displays
+                network information and status indicators.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="project-number">06</div>
+
+            <h3>CyberShield Network Lab</h3>
+
+            <p>
+                Connect networking concepts with CyberShield's
+                cybersecurity learning content.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- NETWORKING + CYBERSECURITY -->
+
+<section>
+
+    <div class="section-title">
+
+        <h2>Networking + Cybersecurity</h2>
+
+        <p>
+            Networking is one of the most important foundations
+            for understanding cybersecurity.
+        </p>
+
+    </div>
+
+
+    <div class="grid">
+
+        <div class="card">
+
+            <h3>Firewalls</h3>
+
+            <p>
+                Understand how firewalls control network traffic
+                according to defined rules.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>Network Monitoring</h3>
+
+            <p>
+                Learn how network traffic and system activity
+                can be observed for troubleshooting and security.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>Secure Protocols</h3>
+
+            <p>
+                Understand why encrypted protocols such as HTTPS
+                and SSH are important.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>Security Fundamentals</h3>
+
+            <p>
+                Combine networking knowledge with authentication,
+                authorization and security controls.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- LEARNING STRATEGY -->
+
+<section>
+
+    <div class="section-title">
+
+        <h2>How to Learn Networking</h2>
+
+        <p>
+            Build your understanding step by step.
+        </p>
+
+    </div>
+
+
+    <div class="grid">
+
+
+        <div class="card">
+
+            <h3>Learn</h3>
+
+            <p>
+                Study the concept and understand why it exists.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>Visualize</h3>
+
+            <p>
+                Draw network diagrams and follow how data moves
+                between devices.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>Practice</h3>
+
+            <p>
+                Work through networking exercises and
+                troubleshooting scenarios.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>Build</h3>
+
+            <p>
+                Create network diagrams, documentation and
+                educational projects.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- BACK -->
+
+<div class="back">
+
+    <a
+        href="../index.html#learning-center"
+        class="btn btn-primary"
+    >
+        ← Back to Learning Center
+    </a>
+
+</div>
+
+
+<footer>
+
+    <p>
+        © 2026 CyberShield — Networking Learning Center
+    </p>
+
+    <p>
+        Learn • Connect • Understand • Secure
+    </p>
+
+</footer>
+
+
+</body>
+</html>

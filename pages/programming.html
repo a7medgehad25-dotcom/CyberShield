@@ -1,0 +1,1142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Programming | CyberShield</title>
+
+    <style>
+        :root {
+            --bg: #071714;
+            --surface: #0d211c;
+            --surface2: #123027;
+            --primary: #21e6a3;
+            --secondary: #00b894;
+            --accent: #8affd5;
+            --text: #f1fff9;
+            --muted: #a8c9be;
+            --border: rgba(33, 230, 163, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(7, 23, 20, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav {
+            max-width: 1200px;
+            margin: auto;
+            padding: 18px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .logo span {
+            color: white;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: var(--muted);
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .hero {
+            min-height: 520px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 80px 25px;
+            background:
+                radial-gradient(circle at top right, rgba(33,230,163,0.15), transparent 35%),
+                radial-gradient(circle at bottom left, rgba(0,184,148,0.10), transparent 35%);
+        }
+
+        .hero-content {
+            max-width: 900px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 8px 16px;
+            border: 1px solid var(--border);
+            border-radius: 30px;
+            color: var(--primary);
+            background: rgba(33,230,163,0.07);
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: clamp(42px, 7vw, 78px);
+            margin-bottom: 20px;
+        }
+
+        .hero h1 span {
+            color: var(--primary);
+        }
+
+        .hero p {
+            max-width: 750px;
+            margin: auto;
+            color: var(--muted);
+            font-size: 18px;
+        }
+
+        .btns {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 13px 22px;
+            border-radius: 10px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: #062018;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(33,230,163,0.2);
+        }
+
+        .btn-secondary {
+            border: 1px solid var(--border);
+            color: var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--surface2);
+        }
+
+        section {
+            max-width: 1200px;
+            margin: auto;
+            padding: 80px 25px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 45px;
+        }
+
+        .section-title h2 {
+            font-size: 38px;
+            margin-bottom: 10px;
+        }
+
+        .section-title p {
+            color: var(--muted);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 22px;
+        }
+
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 25px;
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(33,230,163,0.55);
+        }
+
+        .card-icon {
+            font-size: 35px;
+            margin-bottom: 15px;
+        }
+
+        .card h3 {
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            color: var(--muted);
+        }
+
+        .card ul {
+            padding-left: 20px;
+            color: var(--muted);
+            margin-top: 12px;
+        }
+
+        .card li {
+            margin-bottom: 5px;
+        }
+
+        .notes {
+            display: grid;
+            gap: 15px;
+        }
+
+        details {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 18px 20px;
+        }
+
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 18px;
+        }
+
+        details p,
+        details ul {
+            margin-top: 15px;
+            color: var(--muted);
+        }
+
+        details ul {
+            padding-left: 22px;
+        }
+
+        .code-box {
+            background: #04100d;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 20px;
+            overflow-x: auto;
+        }
+
+        pre {
+            color: var(--accent);
+            font-family: Consolas, monospace;
+        }
+
+        .roadmap {
+            display: grid;
+            gap: 18px;
+        }
+
+        .roadmap-step {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 22px;
+            border-radius: 15px;
+        }
+
+        .number {
+            min-width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--primary);
+            color: #062018;
+            font-weight: bold;
+        }
+
+        .roadmap-step h3 {
+            color: var(--primary);
+        }
+
+        .roadmap-step p {
+            color: var(--muted);
+        }
+
+        .resource-card {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .resource-card a {
+            display: inline-block;
+            padding: 11px 15px;
+            border-radius: 9px;
+            border: 1px solid var(--border);
+            color: var(--primary);
+            transition: 0.3s;
+        }
+
+        .resource-card a:hover {
+            background: var(--surface2);
+        }
+
+        .highlight {
+            border: 1px solid rgba(33,230,163,0.4);
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(33,230,163,0.08),
+                    rgba(0,184,148,0.03)
+                );
+        }
+
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 35px 20px;
+            text-align: center;
+            color: var(--muted);
+        }
+
+        footer strong {
+            color: var(--primary);
+        }
+
+        @media (max-width: 700px) {
+            .nav {
+                flex-direction: column;
+            }
+
+            .hero {
+                padding-top: 60px;
+            }
+
+            section {
+                padding: 60px 18px;
+            }
+
+            .roadmap-step {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <nav class="nav">
+        <div class="logo">
+            Cyber<span>Shield</span> / Programming
+        </div>
+
+        <div class="nav-links">
+            <a href="../index.html">Home</a>
+            <a href="../index.html#learning-center">Learning Center</a>
+            <a href="#topics">Topics</a>
+            <a href="#notes">Notes</a>
+            <a href="#courses">Courses</a>
+        </div>
+    </nav>
+</header>
+
+
+<!-- HERO -->
+<section class="hero">
+
+    <div class="hero-content">
+
+        <div class="badge">
+            💻 Programming Learning Center
+        </div>
+
+        <h1>
+            Learn to <span>Program</span>
+        </h1>
+
+        <p>
+            Learn programming from the fundamentals to advanced concepts,
+            practice problem solving, build projects, and develop the skills
+            needed for software, web, cybersecurity, databases, and BIS.
+        </p>
+
+        <div class="btns">
+            <a href="#roadmap" class="btn btn-primary">
+                Start Roadmap
+            </a>
+
+            <a href="#courses" class="btn btn-secondary">
+                Free Courses
+            </a>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- FUNDAMENTALS -->
+<section id="topics">
+
+    <div class="section-title">
+        <h2>Programming Fundamentals</h2>
+        <p>The concepts you should understand before moving to advanced programming.</p>
+    </div>
+
+    <div class="grid">
+
+        <div class="card">
+            <div class="card-icon">🔢</div>
+            <h3>Variables & Data Types</h3>
+            <p>
+                Learn how programs store and manipulate information.
+            </p>
+            <ul>
+                <li>Integers</li>
+                <li>Floating-point numbers</li>
+                <li>Strings</li>
+                <li>Boolean values</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">🔀</div>
+            <h3>Conditionals</h3>
+            <p>
+                Make programs take different actions depending on conditions.
+            </p>
+            <ul>
+                <li>if</li>
+                <li>else</li>
+                <li>elif</li>
+                <li>Boolean expressions</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">🔁</div>
+            <h3>Loops</h3>
+            <p>
+                Repeat operations efficiently without writing the same code again.
+            </p>
+            <ul>
+                <li>for loops</li>
+                <li>while loops</li>
+                <li>Nested loops</li>
+                <li>Break & Continue</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">🧩</div>
+            <h3>Functions</h3>
+            <p>
+                Organize programs into reusable blocks of code.
+            </p>
+            <ul>
+                <li>Parameters</li>
+                <li>Arguments</li>
+                <li>Return values</li>
+                <li>Scope</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">🗃️</div>
+            <h3>Data Structures</h3>
+            <p>
+                Learn how to organize and work with collections of data.
+            </p>
+            <ul>
+                <li>Arrays</li>
+                <li>Lists</li>
+                <li>Stacks</li>
+                <li>Queues</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">🧠</div>
+            <h3>Algorithms</h3>
+            <p>
+                Learn how to solve problems efficiently using logical steps.
+            </p>
+            <ul>
+                <li>Searching</li>
+                <li>Sorting</li>
+                <li>Recursion</li>
+                <li>Complexity</li>
+            </ul>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- LANGUAGES -->
+<section>
+
+    <div class="section-title">
+        <h2>Programming Languages</h2>
+        <p>Different languages are useful for different types of projects.</p>
+    </div>
+
+    <div class="grid">
+
+        <div class="card highlight">
+            <div class="card-icon">🐍</div>
+            <h3>Python</h3>
+            <p>
+                Beginner-friendly and widely used in automation,
+                cybersecurity, data science, AI and web development.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">⚙️</div>
+            <h3>C</h3>
+            <p>
+                Excellent for understanding memory, low-level concepts,
+                algorithms and how computers work underneath.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">☕</div>
+            <h3>Java</h3>
+            <p>
+                Widely used in software development, enterprise systems
+                and object-oriented programming.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">🌐</div>
+            <h3>JavaScript</h3>
+            <p>
+                The main programming language of the modern web.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">🗄️</div>
+            <h3>SQL</h3>
+            <p>
+                Used to work with relational databases and information systems.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">🧱</div>
+            <h3>C++</h3>
+            <p>
+                Useful for performance-oriented applications,
+                algorithms and software development.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- NOTES -->
+<section id="notes">
+
+    <div class="section-title">
+        <h2>Programming Notes</h2>
+        <p>Click any topic to open the explanation.</p>
+    </div>
+
+    <div class="notes">
+
+        <details>
+            <summary>📌 What is Programming?</summary>
+
+            <p>
+                Programming is the process of writing instructions that
+                a computer can execute to solve problems or perform tasks.
+            </p>
+
+            <p>
+                A programmer breaks a large problem into smaller steps,
+                writes those steps using a programming language, tests the
+                program, and fixes errors.
+            </p>
+        </details>
+
+
+        <details>
+            <summary>📌 Variables</summary>
+
+            <p>
+                A variable is a named place used by a program to store a value.
+            </p>
+
+            <div class="code-box">
+<pre>
+name = "Ahmed"
+age = 18
+is_student = True
+</pre>
+            </div>
+        </details>
+
+
+        <details>
+            <summary>📌 Conditions</summary>
+
+            <p>
+                Conditions allow a program to make decisions.
+            </p>
+
+            <div class="code-box">
+<pre>
+age = 18
+
+if age >= 18:
+    print("Adult")
+else:
+    print("Under 18")
+</pre>
+            </div>
+        </details>
+
+
+        <details>
+            <summary>📌 Loops</summary>
+
+            <p>
+                Loops allow you to repeat code multiple times.
+            </p>
+
+            <div class="code-box">
+<pre>
+for i in range(5):
+    print(i)
+</pre>
+            </div>
+        </details>
+
+
+        <details>
+            <summary>📌 Functions</summary>
+
+            <p>
+                Functions allow you to organize reusable pieces of code.
+            </p>
+
+            <div class="code-box">
+<pre>
+def add(a, b):
+    return a + b
+
+result = add(5, 3)
+print(result)
+</pre>
+            </div>
+        </details>
+
+
+        <details>
+            <summary>📌 Debugging</summary>
+
+            <p>
+                Debugging means finding and fixing problems in your program.
+                A good programmer does not only write code; they learn how
+                to understand errors and solve them.
+            </p>
+
+            <ul>
+                <li>Read the error message.</li>
+                <li>Find the line causing the problem.</li>
+                <li>Check your assumptions.</li>
+                <li>Test small parts of the program.</li>
+            </ul>
+        </details>
+
+
+        <details>
+            <summary>📌 Object-Oriented Programming</summary>
+
+            <p>
+                Object-Oriented Programming, or OOP, organizes software around
+                objects that contain data and behavior.
+            </p>
+
+            <ul>
+                <li>Classes</li>
+                <li>Objects</li>
+                <li>Methods</li>
+                <li>Attributes</li>
+                <li>Encapsulation</li>
+                <li>Inheritance</li>
+            </ul>
+        </details>
+
+    </div>
+
+</section>
+
+
+<!-- ROADMAP -->
+<section id="roadmap">
+
+    <div class="section-title">
+        <h2>Programming Roadmap</h2>
+        <p>A practical path from beginner to project development.</p>
+    </div>
+
+    <div class="roadmap">
+
+        <div class="roadmap-step">
+            <div class="number">1</div>
+            <div>
+                <h3>Programming Basics</h3>
+                <p>
+                    Variables, data types, input/output, conditions and loops.
+                </p>
+            </div>
+        </div>
+
+        <div class="roadmap-step">
+            <div class="number">2</div>
+            <div>
+                <h3>Functions & Problem Solving</h3>
+                <p>
+                    Functions, decomposition, debugging and writing cleaner code.
+                </p>
+            </div>
+        </div>
+
+        <div class="roadmap-step">
+            <div class="number">3</div>
+            <div>
+                <h3>Data Structures</h3>
+                <p>
+                    Arrays, lists, dictionaries, stacks, queues and other structures.
+                </p>
+            </div>
+        </div>
+
+        <div class="roadmap-step">
+            <div class="number">4</div>
+            <div>
+                <h3>Algorithms</h3>
+                <p>
+                    Searching, sorting, recursion and algorithmic thinking.
+                </p>
+            </div>
+        </div>
+
+        <div class="roadmap-step">
+            <div class="number">5</div>
+            <div>
+                <h3>Object-Oriented Programming</h3>
+                <p>
+                    Classes, objects, methods, inheritance and encapsulation.
+                </p>
+            </div>
+        </div>
+
+        <div class="roadmap-step">
+            <div class="number">6</div>
+            <div>
+                <h3>Git & GitHub</h3>
+                <p>
+                    Learn version control and how to manage programming projects.
+                </p>
+            </div>
+        </div>
+
+        <div class="roadmap-step">
+            <div class="number">7</div>
+            <div>
+                <h3>Build Real Projects</h3>
+                <p>
+                    Turn your knowledge into applications that demonstrate
+                    what you can actually build.
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- PROJECTS -->
+<section>
+
+    <div class="section-title">
+        <h2>Programming Projects</h2>
+        <p>Practice by building instead of only watching tutorials.</p>
+    </div>
+
+    <div class="grid">
+
+        <div class="card">
+            <div class="card-icon">🧮</div>
+            <h3>Calculator</h3>
+            <p>
+                Build a calculator that performs basic mathematical operations.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">🔐</div>
+            <h3>Password Generator</h3>
+            <p>
+                Practice strings, randomness and user input with a safe
+                educational project.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">📝</div>
+            <h3>To-Do App</h3>
+            <p>
+                Build an application that allows users to add,
+                complete and remove tasks.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">📊</div>
+            <h3>Student Grade System</h3>
+            <p>
+                Create a program that stores students and calculates grades.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">🏦</div>
+            <h3>Banking Simulator</h3>
+            <p>
+                Practice functions, conditions and data structures
+                with a fictional banking system.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">🌐</div>
+            <h3>Personal Portfolio</h3>
+            <p>
+                Build your own developer portfolio using HTML, CSS and JavaScript.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- HARVARD COURSES -->
+<section id="courses">
+
+    <div class="section-title">
+        <h2>🎓 Harvard Free Programming Courses</h2>
+        <p>
+            Harvard's CS50 OpenCourseWare courses can be studied online for free.
+        </p>
+    </div>
+
+    <div class="grid">
+
+        <div class="card resource-card highlight">
+
+            <div class="card-icon">🎓</div>
+
+            <h3>CS50x — Introduction to Computer Science</h3>
+
+            <p>
+                Harvard's flagship introduction to computer science.
+                It covers C, algorithms, data structures, Python, SQL,
+                HTML, CSS, JavaScript and Flask.
+            </p>
+
+            <a
+                href="https://cs50.harvard.edu/x/"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Open CS50x →
+            </a>
+
+        </div>
+
+
+        <div class="card resource-card">
+
+            <div class="card-icon">🐍</div>
+
+            <h3>CS50P — Introduction to Programming with Python</h3>
+
+            <p>
+                A dedicated Python course covering functions, variables,
+                conditions, loops, exceptions, libraries, testing,
+                file I/O, regular expressions and OOP.
+            </p>
+
+            <a
+                href="https://cs50.harvard.edu/python/"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Open CS50 Python →
+            </a>
+
+        </div>
+
+
+        <div class="card resource-card">
+
+            <div class="card-icon">🌐</div>
+
+            <h3>CS50 Web</h3>
+
+            <p>
+                Continue into web programming with Python, JavaScript,
+                SQL, Django, React, APIs and web application development.
+            </p>
+
+            <a
+                href="https://cs50.harvard.edu/web/"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Open CS50 Web →
+            </a>
+
+        </div>
+
+
+        <div class="card resource-card">
+
+            <div class="card-icon">🗄️</div>
+
+            <h3>CS50 SQL</h3>
+
+            <p>
+                Learn SQL, relational databases, tables, relationships,
+                normalization, indexes and database design.
+            </p>
+
+            <a
+                href="https://cs50.harvard.edu/sql/"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Open CS50 SQL →
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- STUDY MATERIALS -->
+<section>
+
+    <div class="section-title">
+        <h2>📚 Study Materials</h2>
+        <p>Useful resources for practicing programming.</p>
+    </div>
+
+    <div class="grid">
+
+        <div class="card resource-card">
+            <h3>freeCodeCamp</h3>
+            <p>
+                Free interactive programming and web development lessons.
+            </p>
+
+            <a
+                href="https://www.freecodecamp.org/learn/"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Start Learning →
+            </a>
+        </div>
+
+
+        <div class="card resource-card">
+            <h3>Python Documentation</h3>
+            <p>
+                Official Python documentation and language reference.
+            </p>
+
+            <a
+                href="https://docs.python.org/3/"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Open Python Docs →
+            </a>
+        </div>
+
+
+        <div class="card resource-card">
+            <h3>W3Schools</h3>
+            <p>
+                Beginner-friendly references and interactive examples.
+            </p>
+
+            <a
+                href="https://www.w3schools.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Open W3Schools →
+            </a>
+        </div>
+
+
+        <div class="card resource-card">
+            <h3>MDN Web Docs</h3>
+            <p>
+                Detailed documentation for HTML, CSS and JavaScript.
+            </p>
+
+            <a
+                href="https://developer.mozilla.org/"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Open MDN →
+            </a>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- PRACTICE -->
+<section>
+
+    <div class="section-title">
+        <h2>🧪 Practice Strategy</h2>
+        <p>How to actually improve your programming skills.</p>
+    </div>
+
+    <div class="grid">
+
+        <div class="card">
+            <h3>1. Learn</h3>
+            <p>
+                Understand one concept instead of trying to memorize
+                an entire programming language.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>2. Code</h3>
+            <p>
+                Write the concept yourself instead of only watching someone else.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>3. Break Things</h3>
+            <p>
+                Errors are part of programming. Read the error and investigate it.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>4. Build</h3>
+            <p>
+                Use your knowledge to create small projects.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- FINAL -->
+<section>
+
+    <div class="card highlight" style="text-align:center;">
+
+        <h2 style="color:var(--primary); margin-bottom:15px;">
+            Programming connects everything.
+        </h2>
+
+        <p style="color:var(--muted); max-width:800px; margin:auto;">
+            Programming is useful across Cybersecurity, BIS, Databases,
+            Web Development, AI, Data Science and many other technology fields.
+            Build strong fundamentals first, then specialize.
+        </p>
+
+        <div class="btns">
+
+            <a
+                href="../index.html#learning-center"
+                class="btn btn-primary"
+            >
+                ← Back to Learning Center
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<footer>
+    <p>
+        © 2026 <strong>CyberShield</strong> — Programming Learning Center
+    </p>
+
+    <p>
+        Learn • Practice • Build • Grow
+    </p>
+</footer>
+
+</body>
+</html>
